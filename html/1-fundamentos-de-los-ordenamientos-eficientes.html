@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muoxcjzs-faho9cuz5">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by/4.0/">
+<title>1. Fundamentos de los ordenamientos eficientes | 1. Algoritmos de Ordenamiento Eficientes</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+</head>
+<body class="exe-export exe-web-site">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><a href="#page-muoxcjzs-faho9cuz5" id="skipNav">Skip to content</a> <nav id="siteNav">
+<ul>
+<li> <a href="../index.html" class="main-node no-ch">Inicio</a>
+</li>
+<li class="active"> <a href="../html/1-fundamentos-de-los-ordenamientos-eficientes.html" class="active no-ch">1. Fundamentos de los ordenamientos eficientes</a>
+</li>
+<li> <a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" class="no-ch">2. Merge Sort: estrategia y funcionamiento</a>
+</li>
+<li> <a href="../html/3-implementacion-de-merge-sort-en-python.html" class="no-ch">3. Implementación de Merge Sort en Python</a>
+</li>
+<li> <a href="../html/4-quick-sort-y-particionamiento.html" class="no-ch">4. Quick Sort y particionamiento</a>
+</li>
+<li> <a href="../html/5-heap-sort-y-estructura-heap.html" class="no-ch">5. Heap Sort y estructura Heap</a>
+</li>
+<li> <a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" class="no-ch">6. Comparación y selección de algoritmos eficientes</a>
+</li>
+<li> <a href="../html/repaso-algoritmos-de-ordenamiento-eficientes.html" class="no-ch">Repaso: Algoritmos de Ordenamiento Eficientes</a>
+</li>
+</ul>
+</nav><main id="page-muoxcjzs-faho9cuz5" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">1. Algoritmos de Ordenamiento Eficientes</p></div>
+<div class="page-header"><h1 class="page-title">1. Fundamentos de los ordenamientos eficientes</h1></div>
+</header><div id="page-content-page-muoxcjzs-faho9cuz5" class="page-content">
+<article id="block-muoxfix2-p1t2v9hnp" class="box">
+<header class="box-head no-icon">
+<h1 class="box-title">Contenido</h1>
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790822420101-f2n10q53g" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790822420101-f2n10q53g&quot;}">
+<div class="exe-text-template">
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.65; max-width: 1200px; margin: 0 auto;"><!-- ENCABEZADO PRINCIPAL -->
+<div style="background: #3B82F6; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-bottom: 24px;">
+<div style="display: inline-block; background: #FBBF24; color: #1f2937; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 12px;">Ordenamientos eficientes</div>
+<h2 style="margin: 0 0 10px 0; color: #ffffff; font-size: 29px; font-weight: 600;">Fundamentos de los ordenamientos eficientes</h2>
+<p style="margin: 0; color: #ffffff; font-size: 17px;">Comprender por qué algoritmos como Merge Sort, Quick Sort y Heap Sort permiten ordenar grandes cantidades de datos de manera más eficiente.</p>
+</div>
+<!-- INTRODUCCIÓN -->
+<div style="background: #F9F9FB; border: 1px solid #E5E7EB; border-left: 6px solid #10B981; padding: 20px 24px; border-radius: 8px; margin-bottom: 30px;">
+<h3 style="color: #1f2937; margin: 0 0 12px 0; font-size: 22px;">Introducción</h3>
+<p style="margin: 0 0 12px 0;">Los algoritmos de ordenamiento permiten reorganizar un conjunto de datos siguiendo un criterio determinado, por ejemplo, de menor a mayor, de mayor a menor o según alguna característica de los elementos.</p>
+<p style="margin: 0;">Cuando la cantidad de datos aumenta, la eficiencia del algoritmo se vuelve un factor importante. No solamente interesa obtener el resultado correcto, sino también hacerlo utilizando una cantidad razonable de operaciones.</p>
+</div>
+<!-- 1. NECESIDAD DE ALGORITMOS EFICIENTES -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">1. ¿Por qué necesitamos algoritmos eficientes?</h3>
+<p>Algunos algoritmos sencillos de ordenamiento pueden realizar una gran cantidad de comparaciones e intercambios.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 22px 0;">
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 20px; border-radius: 9px; text-align: center;"><strong style="color: #1d4ed8; font-size: 18px;">Bubble Sort</strong>
+<p style="margin: 8px 0 0 0;">Comparaciones repetidas entre elementos vecinos.</p>
+</div>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px; border-radius: 9px; text-align: center;"><strong style="color: #047857; font-size: 18px;">Selection Sort</strong>
+<p style="margin: 8px 0 0 0;">Busca repetidamente el elemento que debe ocupar cada posición.</p>
+</div>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 20px; border-radius: 9px; text-align: center;"><strong style="color: #92400e; font-size: 18px;">Insertion Sort</strong>
+<p style="margin: 8px 0 0 0;">Inserta cada elemento en su posición correspondiente.</p>
+</div>
+</div>
+<div style="background: #FFF7ED; border-left: 6px solid #F97316; padding: 20px 24px; border-radius: 8px;">
+<p style="margin: 0; font-size: 17px;">Muchos algoritmos sencillos presentan un comportamiento aproximado de <strong>O(n²)</strong>, lo cual puede resultar costoso cuando el número de elementos aumenta.</p>
+</div>
+</section>
+<!-- 2. CRECIMIENTO CUADRÁTICO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">2. Crecimiento O(n²)</h3>
+<p>La expresión <strong>O(n²)</strong> indica que el trabajo realizado por el algoritmo puede crecer aproximadamente de forma cuadrática respecto al número de elementos.</p>
+<div style="overflow-x: auto; margin-top: 22px;">
+<table style="width: 100%; border-collapse: collapse; min-width: 500px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB; text-align: center;">Cantidad de elementos</th>
+<th style="padding: 13px; border: 1px solid #2563EB; text-align: center;">n²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">10</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">100</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">100</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">10,000</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">1,000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">1,000,000</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">10,000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">100,000,000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 3. COMPLEJIDAD N LOG N -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">3. Complejidad O(n log n)</h3>
+<p>Algoritmos como <strong>Merge Sort</strong>, <strong>Quick Sort</strong> en su comportamiento promedio y <strong>Heap Sort</strong> pueden alcanzar un comportamiento cercano a <strong>O(n log n)</strong>.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin: 22px 0;">
+<div style="flex: 1 1 280px; background: #EFF6FF; border: 1px solid #BFDBFE; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8; font-size: 18px;">n</strong>
+<p style="margin: 8px 0 0 0;">Representa la cantidad de elementos que deben ser procesados.</p>
+</div>
+<div style="flex: 1 1 280px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px; border-radius: 9px;"><strong style="color: #047857; font-size: 18px;">log n</strong>
+<p style="margin: 8px 0 0 0;">Representa aproximadamente la cantidad de niveles en los que puede dividirse el problema.</p>
+</div>
+</div>
+<div style="background: #1F2937; color: #ffffff; padding: 22px; border-radius: 9px; text-align: center;">
+<div style="font-family: Consolas, monospace; font-size: 18px; line-height: 2;">8 elementos<br />↓<br />4 + 4<br />↓<br />2 + 2 + 2 + 2<br />↓<br />1 + 1 + 1 + 1 + 1 + 1 + 1 + 1</div>
+</div>
+</section>
+<!-- 4. COMPARACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">4. Comparación de crecimiento</h3>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 600px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB;">n</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">n²</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">n log₂(n) aprox.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">10</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">100</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">33</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">100</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">10,000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">664</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">1,000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">1,000,000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">9,966</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">10,000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">100,000,000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">132,877</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- ANIMACIÓN 1 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #10B981; padding-bottom: 9px; margin-bottom: 20px;">Animación: O(n²) frente a O(n log n)</h3>
+<p>Utiliza los controles para modificar la cantidad de elementos y observa cómo cambia la cantidad aproximada de operaciones.</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 24px; border-radius: 10px;">
+<div style="text-align: center; margin-bottom: 20px;"><span style="font-size: 18px; font-weight: bold;"> Elementos: <span id="cantidadElementos">10</span> </span></div>
+<div style="margin-bottom: 24px;"><strong style="color: #dc2626;">O(n²)</strong>
+<div style="background: #E5E7EB; height: 32px; border-radius: 8px; overflow: hidden; margin-top: 8px;">
+<div id="barraCuadratica" style="height: 100%; width: 30%; background: #EF4444; color: #ffffff; text-align: center; line-height: 32px; transition: width 0.5s;">100</div>
+</div>
+</div>
+<div style="margin-bottom: 24px;"><strong style="color: #047857;">O(n log n)</strong>
+<div style="background: #E5E7EB; height: 32px; border-radius: 8px; overflow: hidden; margin-top: 8px;">
+<div id="barraLog" style="height: 100%; width: 15%; background: #10B981; color: #ffffff; text-align: center; line-height: 32px; transition: width 0.5s;">33</div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;"><button onclick="cambiarCantidad(-10)" style="background: #6B7280; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Menos elementos </button> <button onclick="cambiarCantidad(10)" style="background: #3B82F6; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Más elementos </button> <button onclick="reiniciarComparacion()" style="background: #FBBF24; color: #1f2937; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Reiniciar </button></div>
+</div>
+</section>
+<!-- 5. ESTRATEGIAS -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">5. Estrategias de los algoritmos eficientes</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; border-top: 5px solid #3B82F6; padding: 20px; border-radius: 9px;">
+<h4 style="color: #1d4ed8; margin-top: 0;">Merge Sort</h4>
+<p>Divide la colección en partes más pequeñas y posteriormente las combina de forma ordenada.</p>
+<div style="background: #FFFFFF; padding: 12px; border-radius: 6px; text-align: center;">Dividir → Ordenar → Combinar</div>
+</div>
+<div style="background: #ECFDF5; border-top: 5px solid #10B981; padding: 20px; border-radius: 9px;">
+<h4 style="color: #047857; margin-top: 0;">Quick Sort</h4>
+<p>Selecciona un pivote y reorganiza los elementos según sean menores o mayores que ese valor.</p>
+<div style="background: #FFFFFF; padding: 12px; border-radius: 6px; text-align: center;">Particionar → Ordenar</div>
+</div>
+<div style="background: #FFFBEB; border-top: 5px solid #FBBF24; padding: 20px; border-radius: 9px;">
+<h4 style="color: #92400e; margin-top: 0;">Heap Sort</h4>
+<p>Utiliza una estructura Heap para localizar y extraer progresivamente los elementos.</p>
+<div style="background: #FFFFFF; padding: 12px; border-radius: 6px; text-align: center;">Heap → Extraer → Reorganizar</div>
+</div>
+</div>
+</section>
+<!-- 6. DIVISIÓN DEL PROBLEMA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">6. División de problemas</h3>
+<p>Una estrategia frecuente consiste en dividir un problema grande en problemas más pequeños que sean más fáciles de resolver.</p>
+<div style="background: #1F2937; color: #ffffff; padding: 22px; border-radius: 9px; text-align: center; font-family: Consolas, monospace;">[9, 4, 7, 2, 8, 1, 5, 3] <br /><br />↓ <br /><br />[9, 4, 7, 2]     [8, 1, 5, 3] <br /><br />↓ <br /><br />[9, 4] [7, 2]     [8, 1] [5, 3]</div>
+</section>
+<!-- ANIMACIÓN 2 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #10B981; padding-bottom: 9px; margin-bottom: 20px;">Animación: división por niveles</h3>
+<p>Avanza paso a paso para observar cómo una lista puede dividirse hasta obtener elementos individuales.</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 24px; border-radius: 10px;">
+<div id="nivelDivision" style="background: #1F2937; color: #ffffff; padding: 24px; border-radius: 8px; min-height: 110px; text-align: center; font-family: Consolas, monospace; font-size: 17px;">Nivel 0 <br /><br />[8, 3, 6, 2, 7, 1, 5, 4]</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;"><button onclick="siguienteNivel()" style="background: #3B82F6; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;"> Siguiente paso </button> <button onclick="reiniciarDivision()" style="background: #FBBF24; color: #1f2937; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;"> Reiniciar </button></div>
+</div>
+</section>
+<!-- 7. RECURSIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">7. Recursión</h3>
+<p>Merge Sort y muchas implementaciones de Quick Sort utilizan <strong>recursión</strong>.</p>
+<p>La recursión ocurre cuando una función se llama a sí misma utilizando un problema cada vez más pequeño.</p>
+<div style="background: #EFF6FF; border-left: 6px solid #3B82F6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+<div style="text-align: center; font-family: Consolas, monospace;">ordenar(8 elementos) <br />↓<br />ordenar(4 elementos) <br />↓<br />ordenar(2 elementos) <br />↓<br />ordenar(1 elemento)</div>
+</div>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 18px 22px; border-radius: 8px;"><strong style="color: #92400e;">Caso base</strong>
+<p style="margin-bottom: 0;">Es la condición que permite detener las llamadas recursivas cuando el problema ha alcanzado su forma más pequeña.</p>
+</div>
+</section>
+<!-- 8. PYTHON RECURSIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">8. Ejemplo de recursión en Python</h3>
+<p>El siguiente ejemplo permite observar una llamada recursiva sencilla.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; margin: 20px 0; overflow: auto; padding: 22px;"><code>def cuenta_regresiva(numero):
+    if numero == 0:
+        print(&quot;Fin&quot;)
+        return
+
+    print(numero)
+    cuenta_regresiva(numero - 1)
+
+
+cuenta_regresiva(5)</code></pre>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; padding: 18px 22px; border-radius: 8px;"><strong style="color: #047857;">Resultado</strong>
+<pre style="margin: 12px 0 0 0; font-family: Consolas, monospace;">5
+4
+3
+2
+1
+Fin</pre>
+</div>
+</section>
+<!-- 9. DIVISIÓN RECURSIVA PYTHON -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">9. División recursiva de una lista</h3>
+<p>El siguiente ejemplo todavía no ordena los elementos. Su objetivo es mostrar cómo una lista puede dividirse recursivamente.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; margin: 20px 0; overflow: auto; padding: 22px;"><code>def dividir(lista):
+    print(lista)
+
+    if len(lista) &lt;= 1:
+        return
+
+    mitad = len(lista) // 2
+
+    izquierda = lista[:mitad]
+    derecha = lista[mitad:]
+
+    dividir(izquierda)
+    dividir(derecha)
+
+
+numeros = [8, 3, 6, 2, 7, 1, 5, 4]
+
+dividir(numeros)</code></pre>
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 20px; border-radius: 8px;"><strong style="color: #1d4ed8;">Observa</strong>
+<ul style="margin-bottom: 0;">
+<li>La lista original se divide en dos partes.</li>
+<li>Cada parte vuelve a dividirse.</li>
+<li>El proceso continúa hasta obtener listas de un elemento.</li>
+<li><code>len(lista) &lt;= 1</code> funciona como caso base.</li>
+</ul>
+</div>
+</section>
+<!-- PRÁCTICA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica en Python</h3>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 22px 24px; border-radius: 9px;">
+<p>Sustituye la lista utilizada anteriormente por:</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; overflow: auto; padding: 18px;"><code>numeros = [12, 5, 9, 1, 15, 7]
+
+dividir(numeros)</code></pre>
+<p><strong>Analiza el resultado:</strong></p>
+<ol style="margin-bottom: 0;">
+<li style="margin-bottom: 8px;">¿Cuántas divisiones realiza el algoritmo?</li>
+<li style="margin-bottom: 8px;">¿Qué ocurre cuando una lista contiene un único elemento?</li>
+<li style="margin-bottom: 8px;">¿Qué ocurre cuando la cantidad de elementos es impar?</li>
+<li style="margin-bottom: 8px;">¿Qué función cumple <code>len(lista) &lt;= 1</code>?</li>
+<li>Crea una nueva lista con 10 elementos y observa sus divisiones.</li>
+</ol>
+</div>
+</section>
+<!-- IDEA CENTRAL -->
+<div style="background: #1F2937; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-top: 30px;">
+<h3 style="margin: 0 0 12px 0; color: #fbbf24; font-size: 22px;">Síntesis</h3>
+<p style="margin: 0 0 10px 0;">Los algoritmos de ordenamiento eficientes buscan reducir la cantidad de trabajo necesario cuando aumenta el volumen de datos.</p>
+<p style="margin: 0 0 10px 0;">La complejidad <strong>O(n log n)</strong> aparece frecuentemente cuando el algoritmo procesa los elementos mientras divide, reorganiza o estructura el problema en varios niveles.</p>
+<p style="margin: 0;">Merge Sort, Quick Sort y Heap Sort utilizan estrategias diferentes. Comprender estas estrategias permitirá analizar posteriormente cuál algoritmo resulta más apropiado para cada problema.</p>
+</div>
+</div>
+<p>
+<script>
+    /* ===========================================
+       ANIMACIÓN 1 - COMPARACIÓN DE COMPLEJIDAD
+       =========================================== */
+
+    let cantidad = 10;
+
+    function actualizarComparacion() {
+
+        const cuadratica = cantidad * cantidad;
+        const logaritmica = Math.round(cantidad * Math.log2(cantidad));
+
+        document.getElementById("cantidadElementos").textContent = cantidad;
+
+        document.getElementById("barraCuadratica").textContent =
+            cuadratica.toLocaleString();
+
+        document.getElementById("barraLog").textContent =
+            logaritmica.toLocaleString();
+
+        /*
+        Para que las barras puedan visualizarse correctamente,
+        se utiliza una escala relativa.
+        */
+
+        const maximo = cuadratica;
+
+        let porcentajeCuadratica = 100;
+
+        let porcentajeLog =
+            (logaritmica / maximo) * 100;
+
+        porcentajeLog = Math.max(porcentajeLog, 8);
+
+        document.getElementById("barraCuadratica").style.width =
+            porcentajeCuadratica + "%";
+
+        document.getElementById("barraLog").style.width =
+            porcentajeLog + "%";
+    }
+
+
+    function cambiarCantidad(valor) {
+
+        cantidad += valor;
+
+        if (cantidad < 10) {
+            cantidad = 10;
+        }
+
+        if (cantidad > 100) {
+            cantidad = 100;
+        }
+
+        actualizarComparacion();
+    }
+
+
+    function reiniciarComparacion() {
+
+        cantidad = 10;
+
+        actualizarComparacion();
+    }
+
+
+    /* ===========================================
+       ANIMACIÓN 2 - DIVISIÓN POR NIVELES
+       =========================================== */
+
+    const niveles = [
+
+        `Nivel 0
+        <br><br>
+        [8, 3, 6, 2, 7, 1, 5, 4]`,
+
+        `Nivel 1
+        <br><br>
+        [8, 3, 6, 2]
+        &nbsp;&nbsp;&nbsp;
+        [7, 1, 5, 4]`,
+
+        `Nivel 2
+        <br><br>
+        [8, 3]
+        &nbsp;
+        [6, 2]
+        &nbsp;&nbsp;&nbsp;
+        [7, 1]
+        &nbsp;
+        [5, 4]`,
+
+        `Nivel 3
+        <br><br>
+        [8] [3] [6] [2] [7] [1] [5] [4]`
+
+    ];
+
+    let nivelActual = 0;
+
+
+    function siguienteNivel() {
+
+        if (nivelActual < niveles.length - 1) {
+
+            nivelActual++;
+
+            document.getElementById("nivelDivision").innerHTML =
+                niveles[nivelActual];
+
+        }
+
+    }
+
+
+    function reiniciarDivision() {
+
+        nivelActual = 0;
+
+        document.getElementById("nivelDivision").innerHTML =
+            niveles[0];
+
+    }
+</script>
+</p>
+</div>
+</div>
+</div>
+</article>
+</div></main><div class="nav-buttons">
+<a href="../index.html" title="Anterior" class="nav-button nav-button-left"><span>Anterior</span></a>
+<a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" title="Siguiente" class="nav-button nav-button-right"><span>Siguiente</span></a>
+</div>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by/4.0/" class="license">Creative Commons: Reconocimiento 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

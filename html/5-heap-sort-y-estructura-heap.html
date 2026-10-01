@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muoxdmir-370gcvxnl">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by/4.0/">
+<title>5. Heap Sort y estructura Heap | 1. Algoritmos de Ordenamiento Eficientes</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+</head>
+<body class="exe-export exe-web-site">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><a href="#page-muoxdmir-370gcvxnl" id="skipNav">Skip to content</a> <nav id="siteNav">
+<ul>
+<li> <a href="../index.html" class="main-node no-ch">Inicio</a>
+</li>
+<li> <a href="../html/1-fundamentos-de-los-ordenamientos-eficientes.html" class="no-ch">1. Fundamentos de los ordenamientos eficientes</a>
+</li>
+<li> <a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" class="no-ch">2. Merge Sort: estrategia y funcionamiento</a>
+</li>
+<li> <a href="../html/3-implementacion-de-merge-sort-en-python.html" class="no-ch">3. Implementación de Merge Sort en Python</a>
+</li>
+<li> <a href="../html/4-quick-sort-y-particionamiento.html" class="no-ch">4. Quick Sort y particionamiento</a>
+</li>
+<li class="active"> <a href="../html/5-heap-sort-y-estructura-heap.html" class="active no-ch">5. Heap Sort y estructura Heap</a>
+</li>
+<li> <a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" class="no-ch">6. Comparación y selección de algoritmos eficientes</a>
+</li>
+<li> <a href="../html/repaso-algoritmos-de-ordenamiento-eficientes.html" class="no-ch">Repaso: Algoritmos de Ordenamiento Eficientes</a>
+</li>
+</ul>
+</nav><main id="page-muoxdmir-370gcvxnl" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">1. Algoritmos de Ordenamiento Eficientes</p></div>
+<div class="page-header"><h1 class="page-title">5. Heap Sort y estructura Heap</h1></div>
+</header><div id="page-content-page-muoxdmir-370gcvxnl" class="page-content">
+<article id="block-muoyl4kw-zc1zs2um5" class="box">
+<header class="box-head no-icon">
+<h1 class="box-title">Contenido</h1>
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790824361071-1wlu1t9tw" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790824361071-1wlu1t9tw&quot;}">
+<div class="exe-text-template">
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.65; max-width: 1200px; margin: 0 auto;"><!-- ENCABEZADO PRINCIPAL -->
+<div style="background: #3B82F6; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-bottom: 24px;">
+<div style="display: inline-block; background: #FBBF24; color: #1f2937; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 12px;">Ordenamientos eficientes</div>
+<h2 style="margin: 0 0 10px 0; color: #ffffff; font-size: 29px; font-weight: 600;">Heap Sort y estructura Heap</h2>
+<p style="margin: 0; color: #ffffff; font-size: 17px;">Comprender cómo Heap Sort utiliza una estructura Heap, la operación heapify y el intercambio de elementos para realizar un ordenamiento O(n log n).</p>
+</div>
+<!-- INTRODUCCIÓN -->
+<div style="background: #F9F9FB; border: 1px solid #E5E7EB; border-left: 6px solid #10B981; padding: 20px 24px; border-radius: 8px; margin-bottom: 30px;">
+<h3 style="color: #1f2937; margin: 0 0 12px 0; font-size: 22px;">Introducción</h3>
+<p style="margin: 0 0 12px 0;"><strong>Heap Sort</strong> es un algoritmo de ordenamiento eficiente que utiliza una estructura denominada <strong>heap</strong>.</p>
+<p style="margin: 0;">Para ordenar de forma ascendente se utiliza normalmente un <strong>Max Heap</strong>, donde el elemento de mayor valor se mantiene en la raíz y puede colocarse progresivamente en su posición final.</p>
+</div>
+<!-- 1. QUÉ ES HEAP -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">1. ¿Qué es un Heap?</h3>
+<p>Un <strong>heap</strong> es una estructura basada en un árbol binario que mantiene una determinada relación entre los nodos padres y sus hijos.</p>
+<div style="background: #EFF6FF; border-left: 6px solid #3B82F6; padding: 20px 24px; border-radius: 8px; margin-bottom: 20px;">
+<p style="margin: 0; font-size: 17px;">En un <strong>Max Heap</strong>, cada nodo padre posee un valor mayor o igual que el de sus hijos.</p>
+</div>
+<div style="background: #1F2937; color: #ffffff; padding: 24px; border-radius: 9px; text-align: center; font-family: Consolas, monospace; font-size: 18px;">       9 <br />     / \ <br />    7   8 <br />   / \  / \ <br />  3  2 5  4</div>
+</section>
+<!-- 2. MAX Y MIN HEAP -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">2. Max Heap y Min Heap</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 18px;">
+<div style="flex: 1 1 300px; background: #EFF6FF; border: 1px solid #BFDBFE; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8; font-size: 18px;">Max Heap</strong>
+<p>El elemento de mayor valor ocupa la raíz.</p>
+<div style="background: #FFFFFF; padding: 16px; border-radius: 7px; font-family: Consolas, monospace; text-align: center;">Padre &gt;= hijos</div>
+</div>
+<div style="flex: 1 1 300px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px; border-radius: 9px;"><strong style="color: #047857; font-size: 18px;">Min Heap</strong>
+<p>El elemento de menor valor ocupa la raíz.</p>
+<div style="background: #FFFFFF; padding: 16px; border-radius: 7px; font-family: Consolas, monospace; text-align: center;">Padre &lt;= hijos</div>
+</div>
+</div>
+</section>
+<!-- 3. LISTA Y ÁRBOL -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">3. Representación del Heap mediante una lista</h3>
+<p>Aunque visualmente se representa como un árbol, un heap puede almacenarse directamente mediante una lista.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; padding: 22px; overflow: auto;"><code>heap = [9, 7, 8, 3, 2, 5, 4]</code></pre>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px;">
+<div style="flex: 1 1 300px; background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8;">Lista</strong>
+<div style="font-family: Consolas, monospace; margin-top: 10px;">[9, 7, 8, 3, 2, 5, 4]</div>
+</div>
+<div style="flex: 1 1 300px; background: #ECFDF5; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">Árbol</strong>
+<pre style="font-family: Consolas, monospace; margin-bottom: 0; text-align: center;">        9
+       / \
+      7   8
+     / \ / \
+    3  2 5  4</pre>
+</div>
+</div>
+</section>
+<!-- 4. ÍNDICES -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">4. Relación entre índices</h3>
+<p>Si un nodo se encuentra en la posición <code>i</code>, sus hijos pueden calcularse directamente.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8;">Hijo izquierdo</strong>
+<div style="font-family: Consolas, monospace; font-size: 19px; margin-top: 10px;">2 * i + 1</div>
+</div>
+<div style="background: #ECFDF5; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">Hijo derecho</strong>
+<div style="font-family: Consolas, monospace; font-size: 19px; margin-top: 10px;">2 * i + 2</div>
+</div>
+</div>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 20px; border-radius: 9px; margin-top: 20px;">
+<pre style="margin: 0; font-family: Consolas, monospace;">heap = [9, 7, 8, 3, 2, 5, 4]
+
+i = 0
+
+izquierda = 2 * 0 + 1 = 1
+derecha   = 2 * 0 + 2 = 2
+
+heap[1] = 7
+heap[2] = 8</pre>
+</div>
+</section>
+<!-- 5. HEAPIFY -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">5. Operación heapify</h3>
+<p><strong>heapify</strong> permite corregir una parte del árbol cuando no cumple la propiedad del heap.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 18px;">
+<div style="flex: 1 1 300px; background: #FEF2F2; border: 1px solid #FECACA; padding: 20px; border-radius: 9px;"><strong style="color: #b91c1c;">Antes</strong>
+<pre style="font-family: Consolas, monospace; text-align: center;">    4
+   / \
+  9   7</pre>
+<p style="margin-bottom: 0;">No cumple: <code>9 &gt; 4</code>.</p>
+</div>
+<div style="flex: 1 1 300px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">Después de heapify</strong>
+<pre style="font-family: Consolas, monospace; text-align: center;">    9
+   / \
+  4   7</pre>
+<p style="margin-bottom: 0;">La propiedad del Max Heap ha sido restaurada.</p>
+</div>
+</div>
+</section>
+<!-- 6. HEAPIFY PYTHON -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">6. Función heapify() en Python</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def heapify(lista, n, i):
+    mayor = i
+
+    izquierda = 2 * i + 1
+    derecha = 2 * i + 2
+
+    if izquierda &lt; n and lista[izquierda] &gt; lista[mayor]:
+        mayor = izquierda
+
+    if derecha &lt; n and lista[derecha] &gt; lista[mayor]:
+        mayor = derecha
+
+    if mayor != i:
+        lista[i], lista[mayor] = lista[mayor], lista[i]
+
+        heapify(lista, n, mayor)</code></pre>
+</section>
+<!-- 7. PARÁMETROS -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">7. Parámetros de heapify()</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8;">lista</strong>
+<p style="margin-bottom: 0;">Contiene los elementos que representan el heap.</p>
+</div>
+<div style="background: #ECFDF5; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">n</strong>
+<p style="margin-bottom: 0;">Indica cuántos elementos forman parte actualmente del heap.</p>
+</div>
+<div style="background: #FFFBEB; padding: 20px; border-radius: 9px;"><strong style="color: #92400e;">i</strong>
+<p style="margin-bottom: 0;">Representa la posición del nodo que se está verificando.</p>
+</div>
+</div>
+</section>
+<!-- 8. INTERCAMBIO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">8. Intercambio de elementos</h3>
+<p>Si uno de los hijos es mayor que el nodo actual, se realiza un intercambio.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px;"><code>if mayor != i:
+    lista[i], lista[mayor] = lista[mayor], lista[i]</code></pre>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px;">
+<div style="flex: 1 1 250px; background: #FEF2F2; padding: 18px; border-radius: 8px;"><strong>Antes</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[4, 9, 7]</div>
+</div>
+<div style="flex: 1 1 250px; background: #ECFDF5; padding: 18px; border-radius: 8px;"><strong>Después</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[9, 4, 7]</div>
+</div>
+</div>
+</section>
+<!-- 9. CONSTRUCCIÓN DEL HEAP -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">9. Construcción del Max Heap</h3>
+<p>Antes de comenzar el ordenamiento, la lista debe reorganizarse como un Max Heap.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px;"><code>n = len(lista)
+
+for i in range(n // 2 - 1, -1, -1):
+    heapify(lista, n, i)</code></pre>
+<div style="background: #EFF6FF; padding: 20px; border-radius: 9px; margin-top: 18px;">
+<pre style="margin: 0; font-family: Consolas, monospace;">Lista inicial:
+[4, 10, 3, 5, 1]
+
+Max Heap:
+[10, 5, 3, 4, 1]</pre>
+</div>
+</section>
+<!-- 10. EXTRACCIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">10. Extracción del elemento mayor</h3>
+<p>Una vez construido el Max Heap, el valor mayor se encuentra en la raíz.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px;"><code>lista[0], lista[i] = lista[i], lista[0]</code></pre>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 20px; border-radius: 9px; margin-top: 18px;">
+<pre style="margin: 0; font-family: Consolas, monospace;">Antes:
+[10, 5, 3, 4, 1]
+
+Intercambio:
+10 ↔ 1
+
+Después:
+[1, 5, 3, 4, 10]</pre>
+</div>
+<div style="background: #ECFDF5; border-left: 5px solid #10B981; padding: 18px 22px; border-radius: 8px; margin-top: 18px;">El valor <strong>10</strong> ya se encuentra en su posición definitiva.</div>
+</section>
+<!-- ANIMACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #10B981; padding-bottom: 9px; margin-bottom: 20px;">Animación: Heap Sort paso a paso</h3>
+<p>Observa cómo la misma información puede interpretarse como lista y como árbol, y cómo se construye y reduce progresivamente el Max Heap.</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 24px; border-radius: 10px;">
+<div style="text-align: center; margin-bottom: 16px;"><span id="faseHeap" style="display: inline-block; background: #3B82F6; color: #ffffff; padding: 7px 16px; border-radius: 20px; font-weight: bold;"> Inicio </span></div>
+<div id="mensajeHeap" style="text-align: center; font-weight: 600; margin-bottom: 20px;">Lista original.</div>
+<!-- LISTA -->
+<div style="background: #1F2937; padding: 20px; border-radius: 9px;"><strong style="color: #fbbf24;">Representación como lista</strong>
+<div id="listaHeapVisual" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px;"></div>
+</div>
+<!-- ÁRBOL -->
+<div style="background: #FFFFFF; border: 1px solid #E5E7EB; padding: 22px; border-radius: 9px; margin-top: 18px;"><strong style="color: #1f2937;">Representación como árbol</strong>
+<div id="arbolHeapVisual" style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 16px;"></div>
+</div>
+<!-- LEYENDA -->
+<div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 20px; font-size: 14px;"><span> <span style="display: inline-block; width: 14px; height: 14px; background: #FBBF24; border-radius: 3px;"></span> Nodo analizado </span> <span> <span style="display: inline-block; width: 14px; height: 14px; background: #3B82F6; border-radius: 3px;"></span> Heap activo </span> <span> <span style="display: inline-block; width: 14px; height: 14px; background: #EF4444; border-radius: 3px;"></span> Intercambio </span> <span> <span style="display: inline-block; width: 14px; height: 14px; background: #10B981; border-radius: 3px;"></span> Posición final </span></div>
+<!-- CONTROLES -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px;"><button onclick="anteriorHeap()" style="background: #6B7280; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Anterior </button> <button onclick="siguienteHeap()" style="background: #3B82F6; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Siguiente paso </button> <button onclick="automaticoHeap()" style="background: #10B981; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Automático </button> <button onclick="reiniciarHeap()" style="background: #FBBF24; color: #1f2937; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Reiniciar </button></div>
+</div>
+</section>
+<!-- 11. REDUCIR HEAP -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">11. Reducir el tamaño del Heap</h3>
+<p>Después de colocar el elemento mayor en su posición final, este deja de formar parte del heap activo.</p>
+<div style="background: #1F2937; color: #ffffff; padding: 22px; border-radius: 9px; font-family: Consolas, monospace; text-align: center;">[1, 5, 3, 4 | <span style="color: #6ee7b7;">10</span>] <br /><br />Heap activo     Ordenado</div>
+<p style="margin-top: 18px;">Ahora se aplica nuevamente:</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 18px; border-radius: 8px;"><code>heapify(lista, i, 0)</code></pre>
+</section>
+<!-- 12. IMPLEMENTACIÓN COMPLETA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">12. Implementación completa de Heap Sort</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def heapify(lista, n, i):
+    mayor = i
+
+    izquierda = 2 * i + 1
+    derecha = 2 * i + 2
+
+    if izquierda &lt; n and lista[izquierda] &gt; lista[mayor]:
+        mayor = izquierda
+
+    if derecha &lt; n and lista[derecha] &gt; lista[mayor]:
+        mayor = derecha
+
+    if mayor != i:
+        lista[i], lista[mayor] = lista[mayor], lista[i]
+
+        heapify(lista, n, mayor)
+
+
+def heap_sort(lista):
+    n = len(lista)
+
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(lista, n, i)
+
+    for i in range(n - 1, 0, -1):
+        lista[0], lista[i] = lista[i], lista[0]
+
+        heapify(lista, i, 0)
+
+
+numeros = [4, 10, 3, 5, 1]
+
+heap_sort(numeros)
+
+print(numeros)</code></pre>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; padding: 18px 22px; border-radius: 8px; margin-top: 18px;"><strong style="color: #047857;">Resultado</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[1, 3, 4, 5, 10]</div>
+</div>
+</section>
+<!-- 13. MODIFICACIÓN DIRECTA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">13. Modificación directa de la lista</h3>
+<p>Esta implementación de Heap Sort modifica directamente la lista recibida.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px;"><code>numeros = [4, 10, 3, 5, 1]
+
+heap_sort(numeros)
+
+print(numeros)</code></pre>
+<div style="background: #FFFBEB; border-left: 5px solid #FBBF24; padding: 18px 22px; border-radius: 8px;">Después de ejecutar <code>heap_sort(numeros)</code>, la propia variable <code>numeros</code> contiene los elementos ordenados.</div>
+</section>
+<!-- 14. SEGUIMIENTO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">14. Seguimiento de la ejecución</h3>
+<p>Podemos agregar mensajes para observar la construcción y reducción del heap.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def heap_sort(lista):
+    n = len(lista)
+
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(lista, n, i)
+
+    print(&quot;Max Heap:&quot;, lista)
+
+    for i in range(n - 1, 0, -1):
+
+        lista[0], lista[i] = lista[i], lista[0]
+
+        print(&quot;Después del intercambio:&quot;, lista)
+
+        heapify(lista, i, 0)
+
+        print(&quot;Heap restaurado:&quot;, lista)</code></pre>
+</section>
+<!-- 15. FLUJO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">15. Flujo general de Heap Sort</h3>
+<div style="background: #1F2937; color: #ffffff; padding: 24px; border-radius: 9px; font-family: Consolas, monospace; text-align: center;">heap_sort(lista) <br />↓ <br />construir Max Heap <br />↓ <br />mayor elemento en la raíz <br />↓ <br />intercambiar raíz con último <br />↓ <br />reducir tamaño del heap <br />↓ <br />aplicar heapify <br />↓ <br />repetir <br />↓ <br />lista ordenada</div>
+</section>
+<!-- 16. COMPLEJIDAD -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">16. Complejidad de Heap Sort</h3>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 550px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB; text-align: left;">Escenario</th>
+<th style="padding: 13px; border: 1px solid #2563EB; text-align: center;">Complejidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Mejor caso</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Caso promedio</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Peor caso</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="background: #ECFDF5; border-left: 5px solid #10B981; padding: 18px 22px; border-radius: 8px; margin-top: 20px;">Heap Sort mantiene un comportamiento temporal predecible incluso en su peor caso.</div>
+</section>
+<!-- 17. MEMORIA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">17. Uso de memoria</h3>
+<p>Heap Sort puede reorganizar los elementos directamente dentro de la lista.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 18px; border-radius: 8px;"><code>lista[i], lista[mayor] = lista[mayor], lista[i]</code></pre>
+<p>Por ello no necesita crear listas completas como las utilizadas en las implementaciones didácticas de Merge Sort o Quick Sort.</p>
+</section>
+<!-- 18. COMPARACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">18. Comparación inicial</h3>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 800px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB; text-align: left;">Característica</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Merge Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Quick Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Heap Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Estrategia</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Dividir y combinar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Particionar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Heap</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Promedio</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Peor caso</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n²)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Operación principal</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Combinar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Particionar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Heapify</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Modifica la lista</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">No, en nuestra versión</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">No, en nuestra versión</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- PRÁCTICA 1 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 1. Relación entre árbol e índices</h3>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 22px; border-radius: 9px;">
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>numeros = [12, 9, 8, 4, 6, 3, 2]</code></pre>
+<p>Determina los hijos de:</p>
+<pre style="font-family: Consolas, monospace;">i = 0
+
+izquierda = ?
+derecha = ?
+
+
+i = 1
+
+izquierda = ?
+derecha = ?</pre>
+<p style="margin-bottom: 0;">Utiliza: <code>2 * i + 1</code> y <code>2 * i + 2</code>.</p>
+</div>
+</section>
+<!-- PRÁCTICA 2 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 2. Aplicar heapify</h3>
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 22px; border-radius: 9px;">
+<div style="background: #1F2937; color: #ffffff; padding: 16px; border-radius: 7px; text-align: center; font-family: Consolas, monospace;">[4, 10, 3]</div>
+<ol style="margin-bottom: 0; margin-top: 18px;">
+<li>Identifica el nodo padre.</li>
+<li>Determina el hijo izquierdo.</li>
+<li>Determina el hijo derecho.</li>
+<li>Identifica el valor mayor.</li>
+<li>Realiza el intercambio necesario.</li>
+<li>Comprueba el resultado utilizando Python.</li>
+</ol>
+</div>
+</section>
+<!-- PRÁCTICA 3 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 3. Ejecutar Heap Sort</h3>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px;"><code>numeros = [12, 5, 9, 3, 15, 7, 2, 10]
+
+heap_sort(numeros)
+
+print(numeros)</code></pre>
+<p>Después prueba con:</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>numeros = [5, 2, 8, 5, 1, 5]</code></pre>
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>numeros = [7, -3, 4, -8, 2, 0]</code></pre>
+</section>
+<!-- PRÁCTICA 4 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 4. Seguimiento manual</h3>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 22px; border-radius: 9px;">
+<p>Realiza manualmente Heap Sort sobre:</p>
+<div style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px; text-align: center; font-family: Consolas, monospace; font-size: 18px;">[4, 7, 3, 1]</div>
+<ol style="margin-bottom: 0; margin-top: 18px;">
+<li>Construye el Max Heap.</li>
+<li>Identifica el elemento máximo.</li>
+<li>Intercambia la raíz con el último elemento.</li>
+<li>Reduce el tamaño del heap.</li>
+<li>Aplica nuevamente heapify.</li>
+<li>Repite hasta ordenar completamente la lista.</li>
+<li>Comprueba el resultado utilizando Python.</li>
+</ol>
+</div>
+</section>
+<!-- SÍNTESIS -->
+<div style="background: #1F2937; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-top: 30px;">
+<h3 style="margin: 0 0 12px 0; color: #fbbf24; font-size: 22px;">Síntesis</h3>
+<p style="margin: 0 0 10px 0;">Heap Sort utiliza una estructura Heap para mantener el elemento de mayor prioridad en una posición conocida.</p>
+<p style="margin: 0 0 10px 0;">En un Max Heap, el valor mayor se encuentra en la raíz. El algoritmo lo intercambia con la última posición disponible, reduce el tamaño del heap y utiliza <code>heapify()</code> para restaurar su estructura.</p>
+<p style="margin: 0;">Este proceso permite mantener una complejidad de <strong>O(n log n)</strong> incluso en el peor caso.</p>
+</div>
+</div>
+<p>
+<script>
+/* ============================================================
+   ANIMACIÓN HEAP SORT
+   ============================================================ */
+
+const pasosHeap = [
+
+    {
+        fase: "Inicio",
+        mensaje: "Lista original antes de construir el Max Heap.",
+        lista: [4,10,3,5,1],
+        heapSize: 5,
+        activo: -1,
+        intercambio: [],
+        ordenados: []
+    },
+
+    {
+        fase: "Heapify",
+        mensaje: "Se analiza el nodo 4 y sus hijos. El valor 10 es mayor.",
+        lista: [4,10,3,5,1],
+        heapSize: 5,
+        activo: 0,
+        intercambio: [0,1],
+        ordenados: []
+    },
+
+    {
+        fase: "Intercambio",
+        mensaje: "Se intercambian 4 y 10.",
+        lista: [10,4,3,5,1],
+        heapSize: 5,
+        activo: 1,
+        intercambio: [0,1],
+        ordenados: []
+    },
+
+    {
+        fase: "Heapify",
+        mensaje: "El valor 5 es mayor que 4. Se restaura la propiedad del Heap.",
+        lista: [10,5,3,4,1],
+        heapSize: 5,
+        activo: 1,
+        intercambio: [],
+        ordenados: []
+    },
+
+    {
+        fase: "Max Heap",
+        mensaje: "El Max Heap está construido. El valor 10 se encuentra en la raíz.",
+        lista: [10,5,3,4,1],
+        heapSize: 5,
+        activo: 0,
+        intercambio: [],
+        ordenados: []
+    },
+
+    {
+        fase: "Extracción",
+        mensaje: "Se intercambia la raíz 10 con el último elemento del Heap.",
+        lista: [1,5,3,4,10],
+        heapSize: 4,
+        activo: 0,
+        intercambio: [0,4],
+        ordenados: [4]
+    },
+
+    {
+        fase: "Restaurar",
+        mensaje: "Se aplica heapify y 5 vuelve a ocupar la raíz.",
+        lista: [5,4,3,1,10],
+        heapSize: 4,
+        activo: 0,
+        intercambio: [],
+        ordenados: [4]
+    },
+
+    {
+        fase: "Extracción",
+        mensaje: "Se coloca 5 en su posición definitiva.",
+        lista: [1,4,3,5,10],
+        heapSize: 3,
+        activo: 0,
+        intercambio: [0,3],
+        ordenados: [3,4]
+    },
+
+    {
+        fase: "Restaurar",
+        mensaje: "Heapify reorganiza el Heap y 4 pasa a la raíz.",
+        lista: [4,1,3,5,10],
+        heapSize: 3,
+        activo: 0,
+        intercambio: [],
+        ordenados: [3,4]
+    },
+
+    {
+        fase: "Extracción",
+        mensaje: "El valor 4 se coloca en su posición definitiva.",
+        lista: [3,1,4,5,10],
+        heapSize: 2,
+        activo: 0,
+        intercambio: [0,2],
+        ordenados: [2,3,4]
+    },
+
+    {
+        fase: "Extracción",
+        mensaje: "Se completa la última reorganización del Heap.",
+        lista: [1,3,4,5,10],
+        heapSize: 1,
+        activo: 0,
+        intercambio: [],
+        ordenados: [1,2,3,4]
+    },
+
+    {
+        fase: "Final",
+        mensaje: "La lista se encuentra completamente ordenada.",
+        lista: [1,3,4,5,10],
+        heapSize: 0,
+        activo: -1,
+        intercambio: [],
+        ordenados: [0,1,2,3,4]
+    }
+
+];
+
+let pasoHeapActual = 0;
+let intervaloHeap = null;
+
+
+/* ------------------------------------------------------------
+   CREAR ELEMENTO
+   ------------------------------------------------------------ */
+
+function crearElementoHeap(valor, indice, paso) {
+
+    const elemento = document.createElement("span");
+
+    elemento.textContent = valor;
+
+    elemento.style.display = "inline-flex";
+    elemento.style.alignItems = "center";
+    elemento.style.justifyContent = "center";
+    elemento.style.width = "46px";
+    elemento.style.height = "46px";
+    elemento.style.borderRadius = "50%";
+    elemento.style.fontFamily = "Consolas, monospace";
+    elemento.style.fontWeight = "700";
+    elemento.style.transition = "all 0.3s";
+    elemento.style.border = "2px solid transparent";
+
+    if (paso.ordenados.includes(indice)) {
+
+        elemento.style.background = "#10B981";
+        elemento.style.color = "#FFFFFF";
+
+    } else if (paso.intercambio.includes(indice)) {
+
+        elemento.style.background = "#EF4444";
+        elemento.style.color = "#FFFFFF";
+
+    } else if (indice === paso.activo) {
+
+        elemento.style.background = "#FBBF24";
+        elemento.style.color = "#1F2937";
+        elemento.style.transform = "scale(1.12)";
+
+    } else if (indice < paso.heapSize) {
+
+        elemento.style.background = "#3B82F6";
+        elemento.style.color = "#FFFFFF";
+
+    } else {
+
+        elemento.style.background = "#10B981";
+        elemento.style.color = "#FFFFFF";
+    }
+
+    return elemento;
+}
+
+
+/* ------------------------------------------------------------
+   MOSTRAR LISTA
+   ------------------------------------------------------------ */
+
+function mostrarListaHeap(paso) {
+
+    const contenedor = document.getElementById("listaHeapVisual");
+
+    contenedor.innerHTML = "";
+
+    paso.lista.forEach(function(valor, indice) {
+
+        contenedor.appendChild(
+            crearElementoHeap(valor, indice, paso)
+        );
+    });
+}
+
+
+/* ------------------------------------------------------------
+   CREAR ÁRBOL
+   ------------------------------------------------------------ */
+
+function mostrarArbolHeap(paso) {
+
+    const contenedor = document.getElementById("arbolHeapVisual");
+
+    contenedor.innerHTML = "";
+
+    if (paso.heapSize <= 0) {
+
+        const final = document.createElement("div");
+
+        final.textContent = "Heap finalizado";
+
+        final.style.color = "#047857";
+        final.style.fontWeight = "700";
+
+        contenedor.appendChild(final);
+
+        return;
+    }
+
+
+    const niveles = [];
+
+    let indice = 0;
+    let cantidadNivel = 1;
+
+    while (indice < paso.heapSize) {
+
+        const nivel = [];
+
+        for (
+            let i = 0;
+            i < cantidadNivel && indice < paso.heapSize;
+            i++, indice++
+        ) {
+
+            nivel.push(indice);
+        }
+
+        niveles.push(nivel);
+
+        cantidadNivel *= 2;
+    }
+
+
+    niveles.forEach(function(nivel) {
+
+        const fila = document.createElement("div");
+
+        fila.style.display = "flex";
+        fila.style.justifyContent = "center";
+        fila.style.gap = "32px";
+        fila.style.width = "100%";
+
+        nivel.forEach(function(indiceNodo) {
+
+            fila.appendChild(
+                crearElementoHeap(
+                    paso.lista[indiceNodo],
+                    indiceNodo,
+                    paso
+                )
+            );
+        });
+
+        contenedor.appendChild(fila);
+    });
+}
+
+
+/* ------------------------------------------------------------
+   MOSTRAR PASO
+   ------------------------------------------------------------ */
+
+function mostrarPasoHeap() {
+
+    const paso = pasosHeap[pasoHeapActual];
+
+    document.getElementById("faseHeap").textContent =
+        paso.fase;
+
+    document.getElementById("mensajeHeap").textContent =
+        paso.mensaje;
+
+    mostrarListaHeap(paso);
+
+    mostrarArbolHeap(paso);
+}
+
+
+/* ------------------------------------------------------------
+   SIGUIENTE
+   ------------------------------------------------------------ */
+
+function siguienteHeap() {
+
+    detenerAutomaticoHeap();
+
+    if (pasoHeapActual < pasosHeap.length - 1) {
+
+        pasoHeapActual++;
+
+        mostrarPasoHeap();
+    }
+}
+
+
+/* ------------------------------------------------------------
+   ANTERIOR
+   ------------------------------------------------------------ */
+
+function anteriorHeap() {
+
+    detenerAutomaticoHeap();
+
+    if (pasoHeapActual > 0) {
+
+        pasoHeapActual--;
+
+        mostrarPasoHeap();
+    }
+}
+
+
+/* ------------------------------------------------------------
+   REINICIAR
+   ------------------------------------------------------------ */
+
+function reiniciarHeap() {
+
+    detenerAutomaticoHeap();
+
+    pasoHeapActual = 0;
+
+    mostrarPasoHeap();
+}
+
+
+/* ------------------------------------------------------------
+   AUTOMÁTICO
+   ------------------------------------------------------------ */
+
+function automaticoHeap() {
+
+    detenerAutomaticoHeap();
+
+    if (pasoHeapActual >= pasosHeap.length - 1) {
+
+        pasoHeapActual = 0;
+
+        mostrarPasoHeap();
+    }
+
+    intervaloHeap = setInterval(function() {
+
+        if (pasoHeapActual < pasosHeap.length - 1) {
+
+            pasoHeapActual++;
+
+            mostrarPasoHeap();
+
+        } else {
+
+            detenerAutomaticoHeap();
+        }
+
+    }, 1500);
+}
+
+
+/* ------------------------------------------------------------
+   DETENER AUTOMÁTICO
+   ------------------------------------------------------------ */
+
+function detenerAutomaticoHeap() {
+
+    if (intervaloHeap !== null) {
+
+        clearInterval(intervaloHeap);
+
+        intervaloHeap = null;
+    }
+}
+
+
+/* INICIALIZACIÓN */
+mostrarPasoHeap();
+
+</script>
+</p>
+</div>
+</div>
+</div>
+</article>
+</div></main><div class="nav-buttons">
+<a href="../html/4-quick-sort-y-particionamiento.html" title="Anterior" class="nav-button nav-button-left"><span>Anterior</span></a>
+<a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" title="Siguiente" class="nav-button nav-button-right"><span>Siguiente</span></a>
+</div>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by/4.0/" class="license">Creative Commons: Reconocimiento 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

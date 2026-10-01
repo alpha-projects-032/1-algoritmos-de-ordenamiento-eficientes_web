@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muoxc8vk-mtj6w91vq">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by/4.0/">
+<title>Repaso: Algoritmos de Ordenamiento Eficientes | 1. Algoritmos de Ordenamiento Eficientes</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+</head>
+<body class="exe-export exe-web-site">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><a href="#page-muoxc8vk-mtj6w91vq" id="skipNav">Skip to content</a> <nav id="siteNav">
+<ul>
+<li> <a href="../index.html" class="main-node no-ch">Inicio</a>
+</li>
+<li> <a href="../html/1-fundamentos-de-los-ordenamientos-eficientes.html" class="no-ch">1. Fundamentos de los ordenamientos eficientes</a>
+</li>
+<li> <a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" class="no-ch">2. Merge Sort: estrategia y funcionamiento</a>
+</li>
+<li> <a href="../html/3-implementacion-de-merge-sort-en-python.html" class="no-ch">3. Implementación de Merge Sort en Python</a>
+</li>
+<li> <a href="../html/4-quick-sort-y-particionamiento.html" class="no-ch">4. Quick Sort y particionamiento</a>
+</li>
+<li> <a href="../html/5-heap-sort-y-estructura-heap.html" class="no-ch">5. Heap Sort y estructura Heap</a>
+</li>
+<li> <a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" class="no-ch">6. Comparación y selección de algoritmos eficientes</a>
+</li>
+<li class="active"> <a href="../html/repaso-algoritmos-de-ordenamiento-eficientes.html" class="active no-ch">Repaso: Algoritmos de Ordenamiento Eficientes</a>
+</li>
+</ul>
+</nav><main id="page-muoxc8vk-mtj6w91vq" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">1. Algoritmos de Ordenamiento Eficientes</p></div>
+<div class="page-header"><h1 class="page-title">Repaso: Algoritmos de Ordenamiento Eficientes</h1></div>
+</header><div id="page-content-page-muoxc8vk-mtj6w91vq" class="page-content">
+<article id="block-muoyummo-jliebgm3k" class="box">
+<header class="box-head no-icon">
+<h1 class="box-title">Contenido</h1>
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790824804367-aynlx4cem" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790824804367-aynlx4cem&quot;}">
+<div class="exe-text-template">
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.6; max-width: 1200px; margin: 0 auto;"><!-- ENCABEZADO -->
+<div style="background: #3B82F6; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-bottom: 24px;">
+<div style="display: inline-block; background: #FBBF24; color: #1f2937; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 12px;">Actividad interactiva</div>
+<h2 style="margin: 0 0 10px 0; color: #ffffff; font-size: 29px;">Relaciona: Ordenamientos Eficientes</h2>
+<p style="margin: 0; color: #ffffff; font-size: 17px;">Relaciona cada concepto con su definición correcta.</p>
+</div>
+<!-- INDICACIONES -->
+<div style="background: #F9F9FB; border: 1px solid #E5E7EB; border-left: 6px solid #10B981; padding: 20px 24px; border-radius: 8px; margin-bottom: 24px;">
+<h3 style="margin: 0 0 10px 0; font-size: 21px;">Indicaciones</h3>
+<p style="margin: 0;">Selecciona en cada lista desplegable la definición que corresponda al concepto. Después presiona <strong>Comprobar respuestas</strong>. La puntuación máxima es <strong>10 puntos</strong> y puedes realizar <strong>intentos ilimitados</strong>.</p>
+</div>
+<!-- MARCADOR -->
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+<div style="flex: 1 1 220px; background: #EFF6FF; border: 1px solid #BFDBFE; padding: 18px; border-radius: 9px; text-align: center;">
+<div style="font-size: 14px; color: #1d4ed8; font-weight: bold;">PUNTUACIÓN</div>
+<div id="puntajeRelaciona" style="font-size: 32px; font-weight: bold; color: #1d4ed8;">0 / 10</div>
+</div>
+<div style="flex: 1 1 220px; background: #FFFBEB; border: 1px solid #FDE68A; padding: 18px; border-radius: 9px; text-align: center;">
+<div style="font-size: 14px; color: #92400e; font-weight: bold;">INTENTOS</div>
+<div id="intentosRelaciona" style="font-size: 32px; font-weight: bold; color: #92400e;">0</div>
+<div style="font-size: 13px; color: #6b7280;">Ilimitados</div>
+</div>
+</div>
+<!-- ACTIVIDAD -->
+<div id="actividadRelaciona"></div>
+<!-- BOTONES -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 26px;"><button onclick="comprobarRelaciona()" style="background: #3B82F6; color: #ffffff; border: none; padding: 12px 22px; border-radius: 7px; cursor: pointer; font-weight: bold;"> Comprobar respuestas </button> <button onclick="reiniciarRelaciona()" style="background: #FBBF24; color: #1f2937; border: none; padding: 12px 22px; border-radius: 7px; cursor: pointer; font-weight: bold;"> Nuevo intento </button></div>
+<!-- RETROALIMENTACIÓN -->
+<div id="mensajeRelaciona" style="display: none; margin-top: 24px; padding: 20px 24px; border-radius: 9px; font-weight: 600;"></div>
+</div>
+<p>
+<script>
+/* ======================================================
+   JUEGO RELACIONA - ORDENAMIENTOS EFICIENTES
+   10 puntos - Intentos ilimitados
+   ====================================================== */
+
+const elementosRelaciona = [
+
+    {
+        concepto: "Merge Sort",
+        respuesta: "Divide la colección en partes más pequeñas y luego las combina de forma ordenada."
+    },
+
+    {
+        concepto: "Quick Sort",
+        respuesta: "Selecciona un pivote y organiza los elementos en menores, iguales y mayores."
+    },
+
+    {
+        concepto: "Heap Sort",
+        respuesta: "Utiliza una estructura Heap para colocar progresivamente los elementos en su posición final."
+    },
+
+    {
+        concepto: "O(n log n)",
+        respuesta: "Complejidad eficiente que presentan Merge Sort, Heap Sort y Quick Sort en su comportamiento promedio."
+    },
+
+    {
+        concepto: "Pivote",
+        respuesta: "Elemento de referencia utilizado por Quick Sort para realizar el particionamiento."
+    },
+
+    {
+        concepto: "Heapify",
+        respuesta: "Operación que reorganiza una parte del Heap para restaurar su propiedad."
+    },
+
+    {
+        concepto: "Caso base",
+        respuesta: "Condición que detiene las llamadas recursivas cuando la lista tiene uno o ningún elemento."
+    },
+
+    {
+        concepto: "Estabilidad",
+        respuesta: "Propiedad de un algoritmo que conserva el orden relativo de elementos con la misma clave."
+    },
+
+    {
+        concepto: "Max Heap",
+        respuesta: "Estructura donde cada nodo padre es mayor o igual que sus hijos y el valor máximo se encuentra en la raíz."
+    },
+
+    {
+        concepto: "Selección del algoritmo de ordenamiento",
+        respuesta: "Debe considerar complejidad temporal, memoria, estabilidad y características de los datos."
+    }
+
+];
+
+let intentosRelaciona = 0;
+
+
+/* ======================================================
+   MEZCLAR ARREGLO
+   ====================================================== */
+
+function mezclarRelaciona(arreglo) {
+
+    const copia = [...arreglo];
+
+    for (let i = copia.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+
+    return copia;
+}
+
+
+/* ======================================================
+   CREAR ACTIVIDAD
+   ====================================================== */
+
+function crearActividadRelaciona() {
+
+    const contenedor = document.getElementById("actividadRelaciona");
+
+    contenedor.innerHTML = "";
+
+    const respuestas = mezclarRelaciona(
+        elementosRelaciona.map(function(item) {
+            return item.respuesta;
+        })
+    );
+
+
+    elementosRelaciona.forEach(function(item, indice) {
+
+        const tarjeta = document.createElement("div");
+
+        tarjeta.id = "tarjetaRelaciona" + indice;
+
+        tarjeta.style.background = "#FFFFFF";
+        tarjeta.style.border = "1px solid #E5E7EB";
+        tarjeta.style.borderLeft = "6px solid #3B82F6";
+        tarjeta.style.padding = "18px 20px";
+        tarjeta.style.borderRadius = "9px";
+        tarjeta.style.marginBottom = "14px";
+        tarjeta.style.transition = "all 0.3s";
+
+
+        const numero = document.createElement("span");
+
+        numero.textContent = indice + 1;
+
+        numero.style.display = "inline-flex";
+        numero.style.alignItems = "center";
+        numero.style.justifyContent = "center";
+        numero.style.width = "34px";
+        numero.style.height = "34px";
+        numero.style.background = "#3B82F6";
+        numero.style.color = "#FFFFFF";
+        numero.style.borderRadius = "50%";
+        numero.style.fontWeight = "700";
+        numero.style.marginRight = "10px";
+
+
+        const concepto = document.createElement("strong");
+
+        concepto.textContent = item.concepto;
+
+        concepto.style.fontSize = "17px";
+        concepto.style.color = "#1F2937";
+
+
+        const encabezado = document.createElement("div");
+
+        encabezado.style.display = "flex";
+        encabezado.style.alignItems = "center";
+        encabezado.style.marginBottom = "13px";
+
+        encabezado.appendChild(numero);
+        encabezado.appendChild(concepto);
+
+
+        const select = document.createElement("select");
+
+        select.id = "respuestaRelaciona" + indice;
+
+        select.style.width = "100%";
+        select.style.padding = "11px 12px";
+        select.style.border = "1px solid #D1D5DB";
+        select.style.borderRadius = "6px";
+        select.style.background = "#FFFFFF";
+        select.style.color = "#1F2937";
+        select.style.fontSize = "14px";
+
+
+        const opcionInicial = document.createElement("option");
+
+        opcionInicial.value = "";
+        opcionInicial.textContent = "Selecciona una respuesta";
+
+        select.appendChild(opcionInicial);
+
+
+        respuestas.forEach(function(respuesta) {
+
+            const opcion = document.createElement("option");
+
+            opcion.value = respuesta;
+            opcion.textContent = respuesta;
+
+            select.appendChild(opcion);
+        });
+
+
+        const estado = document.createElement("div");
+
+        estado.id = "estadoRelaciona" + indice;
+
+        estado.style.marginTop = "10px";
+        estado.style.fontWeight = "700";
+        estado.style.fontSize = "14px";
+
+
+        tarjeta.appendChild(encabezado);
+        tarjeta.appendChild(select);
+        tarjeta.appendChild(estado);
+
+        contenedor.appendChild(tarjeta);
+    });
+}
+
+
+/* ======================================================
+   COMPROBAR RESPUESTAS
+   ====================================================== */
+
+function comprobarRelaciona() {
+
+    intentosRelaciona++;
+
+    document.getElementById("intentosRelaciona").textContent =
+        intentosRelaciona;
+
+    let puntuacion = 0;
+
+
+    elementosRelaciona.forEach(function(item, indice) {
+
+        const select =
+            document.getElementById("respuestaRelaciona" + indice);
+
+        const tarjeta =
+            document.getElementById("tarjetaRelaciona" + indice);
+
+        const estado =
+            document.getElementById("estadoRelaciona" + indice);
+
+
+        if (select.value === item.respuesta) {
+
+            puntuacion++;
+
+            tarjeta.style.background = "#ECFDF5";
+            tarjeta.style.borderColor = "#A7F3D0";
+            tarjeta.style.borderLeftColor = "#10B981";
+
+            estado.style.color = "#047857";
+            estado.textContent = "✓ Respuesta correcta";
+
+        } else {
+
+            tarjeta.style.background = "#FEF2F2";
+            tarjeta.style.borderColor = "#FECACA";
+            tarjeta.style.borderLeftColor = "#EF4444";
+
+            estado.style.color = "#B91C1C";
+
+            if (select.value === "") {
+
+                estado.textContent = "✗ Debes seleccionar una respuesta.";
+
+            } else {
+
+                estado.textContent = "✗ Respuesta incorrecta.";
+            }
+        }
+
+    });
+
+
+    document.getElementById("puntajeRelaciona").textContent =
+        puntuacion + " / 10";
+
+
+    mostrarMensajeRelaciona(puntuacion);
+}
+
+
+/* ======================================================
+   MENSAJE FINAL
+   ====================================================== */
+
+function mostrarMensajeRelaciona(puntuacion) {
+
+    const mensaje = document.getElementById("mensajeRelaciona");
+
+    mensaje.style.display = "block";
+
+
+    if (puntuacion === 10) {
+
+        mensaje.style.background = "#ECFDF5";
+        mensaje.style.border = "1px solid #A7F3D0";
+        mensaje.style.color = "#047857";
+
+        mensaje.innerHTML =
+            "Excelente. Has obtenido <strong>10 de 10 puntos</strong>. " +
+            "Relacionaste correctamente todos los conceptos.";
+
+    } else if (puntuacion >= 7) {
+
+        mensaje.style.background = "#EFF6FF";
+        mensaje.style.border = "1px solid #BFDBFE";
+        mensaje.style.color = "#1D4ED8";
+
+        mensaje.innerHTML =
+            "Has obtenido <strong>" + puntuacion +
+            " de 10 puntos</strong>. Revisa las respuestas marcadas " +
+            "y vuelve a intentarlo.";
+
+    } else {
+
+        mensaje.style.background = "#FFFBEB";
+        mensaje.style.border = "1px solid #FDE68A";
+        mensaje.style.color = "#92400E";
+
+        mensaje.innerHTML =
+            "Has obtenido <strong>" + puntuacion +
+            " de 10 puntos</strong>. Revisa los conceptos de Merge Sort, " +
+            "Quick Sort y Heap Sort antes de realizar otro intento.";
+    }
+}
+
+
+/* ======================================================
+   NUEVO INTENTO
+   ====================================================== */
+
+function reiniciarRelaciona() {
+
+    document.getElementById("puntajeRelaciona").textContent =
+        "0 / 10";
+
+    document.getElementById("mensajeRelaciona").style.display =
+        "none";
+
+    crearActividadRelaciona();
+}
+
+
+/* ======================================================
+   INICIALIZACIÓN
+   ====================================================== */
+
+crearActividadRelaciona();
+
+</script>
+</p>
+</div>
+</div>
+</div>
+</article>
+</div></main><div class="nav-buttons">
+<a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" title="Anterior" class="nav-button nav-button-left"><span>Anterior</span></a>
+<span class="nav-button nav-button-right" aria-hidden="true"><span>Siguiente</span></span>
+</div>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by/4.0/" class="license">Creative Commons: Reconocimiento 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

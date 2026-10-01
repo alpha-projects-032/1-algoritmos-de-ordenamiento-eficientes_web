@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muoxdcgb-048vdzze4">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by/4.0/">
+<title>4. Quick Sort y particionamiento | 1. Algoritmos de Ordenamiento Eficientes</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+</head>
+<body class="exe-export exe-web-site">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><a href="#page-muoxdcgb-048vdzze4" id="skipNav">Skip to content</a> <nav id="siteNav">
+<ul>
+<li> <a href="../index.html" class="main-node no-ch">Inicio</a>
+</li>
+<li> <a href="../html/1-fundamentos-de-los-ordenamientos-eficientes.html" class="no-ch">1. Fundamentos de los ordenamientos eficientes</a>
+</li>
+<li> <a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" class="no-ch">2. Merge Sort: estrategia y funcionamiento</a>
+</li>
+<li> <a href="../html/3-implementacion-de-merge-sort-en-python.html" class="no-ch">3. Implementación de Merge Sort en Python</a>
+</li>
+<li class="active"> <a href="../html/4-quick-sort-y-particionamiento.html" class="active no-ch">4. Quick Sort y particionamiento</a>
+</li>
+<li> <a href="../html/5-heap-sort-y-estructura-heap.html" class="no-ch">5. Heap Sort y estructura Heap</a>
+</li>
+<li> <a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" class="no-ch">6. Comparación y selección de algoritmos eficientes</a>
+</li>
+<li> <a href="../html/repaso-algoritmos-de-ordenamiento-eficientes.html" class="no-ch">Repaso: Algoritmos de Ordenamiento Eficientes</a>
+</li>
+</ul>
+</nav><main id="page-muoxdcgb-048vdzze4" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">1. Algoritmos de Ordenamiento Eficientes</p></div>
+<div class="page-header"><h1 class="page-title">4. Quick Sort y particionamiento</h1></div>
+</header><div id="page-content-page-muoxdcgb-048vdzze4" class="page-content">
+<article id="block-muoyiq6i-boz2bs8me" class="box">
+<header class="box-head no-icon">
+<h1 class="box-title">Contenido</h1>
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790824249095-p8bqblnte" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790824249095-p8bqblnte&quot;}">
+<div class="exe-text-template">
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.65; max-width: 1200px; margin: 0 auto;"><!-- ENCABEZADO PRINCIPAL -->
+<div style="background: #3B82F6; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-bottom: 24px;">
+<div style="display: inline-block; background: #FBBF24; color: #1f2937; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 12px;">Ordenamientos eficientes</div>
+<h2 style="margin: 0 0 10px 0; color: #ffffff; font-size: 29px; font-weight: 600;">Quick Sort y particionamiento</h2>
+<p style="margin: 0; color: #ffffff; font-size: 17px;">Comprender cómo Quick Sort utiliza un pivote, el particionamiento y la recursión para organizar los elementos de una colección.</p>
+</div>
+<!-- INTRODUCCIÓN -->
+<div style="background: #F9F9FB; border: 1px solid #E5E7EB; border-left: 6px solid #10B981; padding: 20px 24px; border-radius: 8px; margin-bottom: 30px;">
+<h3 style="color: #1f2937; margin: 0 0 12px 0; font-size: 22px;">Introducción</h3>
+<p style="margin: 0 0 12px 0;"><strong>Quick Sort</strong> es un algoritmo de ordenamiento eficiente basado en la estrategia <strong>divide y vencerás</strong>.</p>
+<p style="margin: 0;">A diferencia de Merge Sort, no divide necesariamente la lista por la mitad. En su lugar, selecciona un elemento denominado <strong>pivote</strong> y organiza los demás elementos alrededor de él.</p>
+</div>
+<!-- 1. IDEA GENERAL -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">1. Estrategia general de Quick Sort</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 22px 0;">
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-top: 5px solid #3B82F6; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8; font-size: 18px;">1. Elegir pivote</strong>
+<p style="margin: 8px 0 0 0;">Seleccionar un elemento que funcionará como referencia.</p>
+</div>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; border-top: 5px solid #FBBF24; padding: 20px; border-radius: 9px;"><strong style="color: #92400e; font-size: 18px;">2. Particionar</strong>
+<p style="margin: 8px 0 0 0;">Separar elementos menores, iguales y mayores que el pivote.</p>
+</div>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-top: 5px solid #10B981; padding: 20px; border-radius: 9px;"><strong style="color: #047857; font-size: 18px;">3. Ordenar</strong>
+<p style="margin: 8px 0 0 0;">Aplicar Quick Sort recursivamente a las particiones.</p>
+</div>
+</div>
+<div style="background: #1F2937; color: #ffffff; padding: 20px; border-radius: 9px; text-align: center;"><strong style="color: #fbbf24; font-size: 18px;"> Elegir pivote → Particionar → Ordenar </strong></div>
+</section>
+<!-- 2. PIVOTE -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">2. ¿Qué es el pivote?</h3>
+<p>El pivote es un elemento seleccionado de la lista que sirve como referencia para distribuir los demás valores.</p>
+<div style="background: #1F2937; color: #ffffff; padding: 22px; border-radius: 9px; text-align: center; font-family: Consolas, monospace; font-size: 18px;">[8, 3, <span style="background: #FBBF24; color: #1f2937; padding: 4px 8px; border-radius: 5px;">6</span>, 2, 7] <br /><br />Pivote = 6</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 20px;">
+<div style="flex: 1 1 220px; background: #EFF6FF; padding: 18px; border-radius: 8px; text-align: center;"><strong style="color: #1d4ed8;">Menores</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[3, 2]</div>
+</div>
+<div style="flex: 1 1 220px; background: #FFFBEB; padding: 18px; border-radius: 8px; text-align: center;"><strong style="color: #92400e;">Pivote</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[6]</div>
+</div>
+<div style="flex: 1 1 220px; background: #ECFDF5; padding: 18px; border-radius: 8px; text-align: center;"><strong style="color: #047857;">Mayores</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[8, 7]</div>
+</div>
+</div>
+</section>
+<!-- 3. PARTICIONAMIENTO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">3. Proceso de particionamiento</h3>
+<p>Consideremos:</p>
+<div style="background: #EFF6FF; padding: 18px; border-radius: 8px; text-align: center; font-family: Consolas, monospace; font-size: 18px;">[9, 4, 7, 3, 8, 2]</div>
+<p style="margin-top: 20px;">Si utilizamos <strong>7</strong> como pivote:</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 20px; border-radius: 9px;">
+<div style="margin-bottom: 10px;"><code>9 &gt; 7</code> → mayores</div>
+<div style="margin-bottom: 10px;"><code>4 &lt; 7</code> → menores</div>
+<div style="margin-bottom: 10px;"><code>7 = 7</code> → iguales</div>
+<div style="margin-bottom: 10px;"><code>3 &lt; 7</code> → menores</div>
+<div style="margin-bottom: 10px;"><code>8 &gt; 7</code> → mayores</div>
+<div><code>2 &lt; 7</code> → menores</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px;">
+<div style="background: #EFF6FF; padding: 18px; border-radius: 8px;"><strong style="color: #1d4ed8;">Menores</strong>
+<div style="font-family: Consolas, monospace;">[4, 3, 2]</div>
+</div>
+<div style="background: #FFFBEB; padding: 18px; border-radius: 8px;"><strong style="color: #92400e;">Iguales</strong>
+<div style="font-family: Consolas, monospace;">[7]</div>
+</div>
+<div style="background: #ECFDF5; padding: 18px; border-radius: 8px;"><strong style="color: #047857;">Mayores</strong>
+<div style="font-family: Consolas, monospace;">[9, 8]</div>
+</div>
+</div>
+</section>
+<!-- 4. RECURSIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">4. Aplicar Quick Sort nuevamente</h3>
+<p>Las particiones menores y mayores también deben ordenarse.</p>
+<div style="background: #1F2937; color: #ffffff; padding: 22px; border-radius: 9px; text-align: center; font-family: Consolas, monospace;">quick_sort([4, 3, 2]) <br /><br />↓ <br /><br />[2] + [3] + [4] <br /><br />↓ <br /><br />[2, 3, 4] <br /><br /><br />quick_sort([9, 8]) <br /><br />↓ <br /><br />[] + [8] + [9] <br /><br />↓ <br /><br />[8, 9]</div>
+<div style="background: #ECFDF5; border-left: 5px solid #10B981; padding: 18px 22px; border-radius: 8px; margin-top: 20px;">Resultado final: <strong>[2, 3, 4, 7, 8, 9]</strong></div>
+</section>
+<!-- 5. CASO BASE -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">5. Caso base</h3>
+<p>Si una lista contiene uno o ningún elemento, ya se considera ordenada.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>if len(lista) &lt;= 1:
+    return lista</code></pre>
+</section>
+<!-- 6. SELECCIÓN DEL PIVOTE -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">6. Estrategias para seleccionar el pivote</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8;">Primer elemento</strong>
+<pre style="background: #1F2937; color: #ffffff; padding: 14px; border-radius: 7px;"><code>pivote = lista[0]</code></pre>
+</div>
+<div style="background: #ECFDF5; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">Último elemento</strong>
+<pre style="background: #1F2937; color: #ffffff; padding: 14px; border-radius: 7px;"><code>pivote = lista[-1]</code></pre>
+</div>
+<div style="background: #FFFBEB; padding: 20px; border-radius: 9px;"><strong style="color: #92400e;">Elemento central</strong>
+<pre style="background: #1F2937; color: #ffffff; padding: 14px; border-radius: 7px;"><code>pivote = lista[len(lista) // 2]</code></pre>
+</div>
+</div>
+</section>
+<!-- 7. BUEN Y MAL PIVOTE -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">7. Particiones equilibradas y desequilibradas</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 18px;">
+<div style="flex: 1 1 300px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px; border-radius: 9px;"><strong style="color: #047857; font-size: 18px;">Partición equilibrada</strong>
+<pre style="font-family: Consolas, monospace;">[3, 2, 1] [5] [8, 6, 7]</pre>
+<p style="margin-bottom: 0;">Favorece un comportamiento cercano a <strong>O(n log n)</strong>.</p>
+</div>
+<div style="flex: 1 1 300px; background: #FEF2F2; border: 1px solid #FECACA; padding: 20px; border-radius: 9px;"><strong style="color: #b91c1c; font-size: 18px;">Partición desequilibrada</strong>
+<pre style="font-family: Consolas, monospace;">[] [1] [2, 3, 4, 5]</pre>
+<p style="margin-bottom: 0;">Puede acercar el algoritmo a <strong>O(n²)</strong>.</p>
+</div>
+</div>
+</section>
+<!-- ANIMACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #10B981; padding-bottom: 9px; margin-bottom: 20px;">Animación: pivote y particionamiento</h3>
+<p>Utiliza los controles para observar cómo cada elemento se compara con el pivote.</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 24px; border-radius: 10px;">
+<div style="text-align: center; margin-bottom: 18px;"><span id="faseQuick" style="display: inline-block; background: #3B82F6; color: #ffffff; padding: 7px 16px; border-radius: 20px; font-weight: bold;"> Inicio </span></div>
+<div id="mensajeQuick" style="text-align: center; font-weight: 600; margin-bottom: 20px;">Lista original.</div>
+<!-- LISTA ORIGINAL -->
+<div style="background: #1F2937; padding: 20px; border-radius: 9px;">
+<div style="color: #fbbf24; font-weight: bold; margin-bottom: 12px;">Lista</div>
+<div id="listaQuickVisual" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;"></div>
+</div>
+<!-- PARTICIONES -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-top: 20px;">
+<div style="background: #EFF6FF; padding: 18px; border-radius: 8px;"><strong style="color: #1d4ed8;">Menores</strong>
+<div id="menoresQuick" style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; min-height: 44px;"></div>
+</div>
+<div style="background: #FFFBEB; padding: 18px; border-radius: 8px;"><strong style="color: #92400e;">Iguales / Pivote</strong>
+<div id="igualesQuick" style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; min-height: 44px;"></div>
+</div>
+<div style="background: #ECFDF5; padding: 18px; border-radius: 8px;"><strong style="color: #047857;">Mayores</strong>
+<div id="mayoresQuick" style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; min-height: 44px;"></div>
+</div>
+</div>
+<div style="text-align: center; margin-top: 18px;"><strong> Pivote = <span id="valorPivoteQuick">6</span> </strong></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;"><button onclick="anteriorQuick()" style="background: #6B7280; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Anterior </button> <button onclick="siguienteQuick()" style="background: #3B82F6; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Siguiente paso </button> <button onclick="automaticoQuick()" style="background: #10B981; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Automático </button> <button onclick="reiniciarQuick()" style="background: #FBBF24; color: #1f2937; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Reiniciar </button></div>
+</div>
+</section>
+<!-- 8. IMPLEMENTACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">8. Implementación sencilla en Python</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def quick_sort(lista):
+
+    if len(lista) &lt;= 1:
+        return lista
+
+    pivote = lista[len(lista) // 2]
+
+    menores = []
+    iguales = []
+    mayores = []
+
+    for elemento in lista:
+
+        if elemento &lt; pivote:
+            menores.append(elemento)
+
+        elif elemento == pivote:
+            iguales.append(elemento)
+
+        else:
+            mayores.append(elemento)
+
+    return (
+        quick_sort(menores)
+        + iguales
+        + quick_sort(mayores)
+    )</code></pre>
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 20px; border-radius: 9px; margin-top: 18px;">
+<pre style="background: #1F2937; color: #ffffff; padding: 16px; border-radius: 7px; overflow: auto;"><code>numeros = [8, 3, 6, 2, 7, 1, 5, 4]
+
+resultado = quick_sort(numeros)
+
+print(resultado)</code></pre>
+<strong style="color: #1d4ed8;">Resultado:</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[1, 2, 3, 4, 5, 6, 7, 8]</div>
+</div>
+</section>
+<!-- 9. TRES LISTAS -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">9. Manejo de valores repetidos</h3>
+<p>La utilización de tres listas permite manejar correctamente valores iguales al pivote.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px;"><code>menores = []
+iguales = []
+mayores = []</code></pre>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 20px; border-radius: 9px; margin-top: 18px;">
+<pre style="margin: 0; font-family: Consolas, monospace;">lista = [5, 2, 5, 8, 5, 1]
+
+pivote = 5
+
+menores = [2, 1]
+
+iguales = [5, 5, 5]
+
+mayores = [8]</pre>
+</div>
+</section>
+<!-- 10. SEGUIMIENTO PRINT -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">10. Seguimiento de ejecución en Python</h3>
+<p>Podemos utilizar <code>print()</code> para observar cada partición realizada.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def quick_sort(lista):
+
+    if len(lista) &lt;= 1:
+        return lista
+
+    pivote = lista[len(lista) // 2]
+
+    menores = []
+    iguales = []
+    mayores = []
+
+    for elemento in lista:
+
+        if elemento &lt; pivote:
+            menores.append(elemento)
+
+        elif elemento == pivote:
+            iguales.append(elemento)
+
+        else:
+            mayores.append(elemento)
+
+    print(&quot;Lista:&quot;, lista)
+    print(&quot;Pivote:&quot;, pivote)
+    print(&quot;Menores:&quot;, menores)
+    print(&quot;Iguales:&quot;, iguales)
+    print(&quot;Mayores:&quot;, mayores)
+    print()
+
+    return (
+        quick_sort(menores)
+        + iguales
+        + quick_sort(mayores)
+    )</code></pre>
+</section>
+<!-- 11. FLUJO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">11. Flujo general de Quick Sort</h3>
+<div style="background: #1F2937; color: #ffffff; padding: 24px; border-radius: 9px; font-family: Consolas, monospace; text-align: center;">quick_sort(lista) <br />↓ <br />¿len(lista) &lt;= 1? <br />↓ <br />elegir pivote <br />↓ <br />particionar <br />↓ <br />menores | iguales | mayores <br />↓ <br />quick_sort(menores) <br />+ <br />iguales <br />+ <br />quick_sort(mayores) <br />↓ <br />resultado</div>
+</section>
+<!-- 12. COMPLEJIDAD -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">12. Complejidad de Quick Sort</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 18px;">
+<div style="flex: 1 1 280px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px; border-radius: 9px;"><strong style="color: #047857; font-size: 18px;">Caso promedio</strong>
+<p>Cuando las particiones son relativamente equilibradas:</p>
+<div style="font-size: 22px; text-align: center; font-weight: bold;">O(n log n)</div>
+</div>
+<div style="flex: 1 1 280px; background: #FEF2F2; border: 1px solid #FECACA; padding: 20px; border-radius: 9px;"><strong style="color: #b91c1c; font-size: 18px;">Peor caso</strong>
+<p>Cuando las particiones resultan altamente desequilibradas:</p>
+<div style="font-size: 22px; text-align: center; font-weight: bold;">O(n²)</div>
+</div>
+</div>
+</section>
+<!-- 13. COMPARACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">13. Comparación inicial con Merge Sort</h3>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB; text-align: left;">Característica</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Merge Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Quick Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Estrategia</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Divide y vencerás</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Divide y vencerás</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">División</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Por la mitad</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Mediante pivote</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Promedio</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Peor caso</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n²)</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Operación principal</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Combinar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Particionar</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- PRÁCTICA 1 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 1. Identificar las particiones</h3>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 22px; border-radius: 9px;">
+<p>Analiza la siguiente colección sin ejecutar Python:</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>[9, 3, 7, 1, 8, 2, 6]</code></pre>
+<p>Utiliza <strong>7</strong> como pivote y determina:</p>
+<pre style="font-family: Consolas, monospace;">menores = ?
+
+iguales = ?
+
+mayores = ?</pre>
+<p style="margin-bottom: 0;">Después representa: <code>quick_sort(menores) + iguales + quick_sort(mayores)</code>.</p>
+</div>
+</section>
+<!-- PRÁCTICA 2 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 2. Probar diferentes entradas</h3>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px; overflow: auto;"><code>numeros = [12, 5, 9, 3, 15, 7, 2, 10]
+
+resultado = quick_sort(numeros)
+
+print(resultado)</code></pre>
+<div style="background: #EFF6FF; padding: 20px; border-radius: 8px; margin-top: 18px;">
+<p><strong>Después prueba con:</strong></p>
+<ul style="margin-bottom: 0;">
+<li><code>[5, 2, 8, 5, 1, 5]</code></li>
+<li><code>[7, -3, 4, -8, 2, 0]</code></li>
+<li><code>[1, 2, 3, 4, 5, 6]</code></li>
+<li><code>[6, 5, 4, 3, 2, 1]</code></li>
+</ul>
+</div>
+</section>
+<!-- PRÁCTICA 3 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 3. Cambiar el pivote</h3>
+<p>Sustituye:</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>pivote = lista[len(lista) // 2]</code></pre>
+<p>por:</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>pivote = lista[0]</code></pre>
+<p>Ejecuta:</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>numeros = [1, 2, 3, 4, 5, 6, 7, 8]</code></pre>
+<div style="background: #FFFBEB; border-left: 5px solid #FBBF24; padding: 18px 22px; border-radius: 8px;">Observa cómo cambia la distribución de las particiones cuando se modifica la estrategia utilizada para seleccionar el pivote.</div>
+</section>
+<!-- PRÁCTICA 4 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 4. Orden descendente</h3>
+<p>Analiza cómo modificar la lógica de particionamiento para obtener un orden descendente.</p>
+<div style="background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong>Entrada:</strong>
+<pre style="font-family: Consolas, monospace;">[8, 3, 6, 2, 7, 1, 5, 4]</pre>
+<strong>Resultado esperado:</strong>
+<pre style="font-family: Consolas, monospace;">[8, 7, 6, 5, 4, 3, 2, 1]</pre>
+<p style="margin-bottom: 0;">Analiza qué partición debe colocarse primero al reconstruir la lista.</p>
+</div>
+</section>
+<!-- SÍNTESIS -->
+<div style="background: #1F2937; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-top: 30px;">
+<h3 style="margin: 0 0 12px 0; color: #fbbf24; font-size: 22px;">Síntesis</h3>
+<p style="margin: 0 0 10px 0;">Quick Sort organiza los datos seleccionando un pivote y distribuyendo los elementos en grupos menores, iguales y mayores.</p>
+<p style="margin: 0 0 10px 0;">Las particiones se procesan recursivamente hasta alcanzar listas suficientemente pequeñas y posteriormente se unen para producir el resultado ordenado.</p>
+<p style="margin: 0;">Su rendimiento promedio es <strong>O(n log n)</strong>, aunque particiones muy desequilibradas pueden provocar un comportamiento cercano a <strong>O(n²)</strong>.</p>
+</div>
+</div>
+<p>
+<script>
+/* =====================================================
+   ANIMACIÓN DE QUICK SORT Y PARTICIONAMIENTO
+   ===================================================== */
+
+const pasosQuick = [
+
+    {
+        fase: "Inicio",
+        mensaje: "Lista original. El elemento 6 será utilizado como pivote.",
+        lista: [8,3,6,2,7,1,5],
+        actual: -1,
+        pivoteIndice: 2,
+        menores: [],
+        iguales: [],
+        mayores: []
+    },
+
+    {
+        fase: "Pivote",
+        mensaje: "Se selecciona 6 como pivote.",
+        lista: [8,3,6,2,7,1,5],
+        actual: 2,
+        pivoteIndice: 2,
+        menores: [],
+        iguales: [6],
+        mayores: []
+    },
+
+    {
+        fase: "Comparación",
+        mensaje: "8 > 6. El valor 8 se agrega a mayores.",
+        lista: [8,3,6,2,7,1,5],
+        actual: 0,
+        pivoteIndice: 2,
+        menores: [],
+        iguales: [6],
+        mayores: [8]
+    },
+
+    {
+        fase: "Comparación",
+        mensaje: "3 < 6. El valor 3 se agrega a menores.",
+        lista: [8,3,6,2,7,1,5],
+        actual: 1,
+        pivoteIndice: 2,
+        menores: [3],
+        iguales: [6],
+        mayores: [8]
+    },
+
+    {
+        fase: "Comparación",
+        mensaje: "2 < 6. El valor 2 se agrega a menores.",
+        lista: [8,3,6,2,7,1,5],
+        actual: 3,
+        pivoteIndice: 2,
+        menores: [3,2],
+        iguales: [6],
+        mayores: [8]
+    },
+
+    {
+        fase: "Comparación",
+        mensaje: "7 > 6. El valor 7 se agrega a mayores.",
+        lista: [8,3,6,2,7,1,5],
+        actual: 4,
+        pivoteIndice: 2,
+        menores: [3,2],
+        iguales: [6],
+        mayores: [8,7]
+    },
+
+    {
+        fase: "Comparación",
+        mensaje: "1 < 6. El valor 1 se agrega a menores.",
+        lista: [8,3,6,2,7,1,5],
+        actual: 5,
+        pivoteIndice: 2,
+        menores: [3,2,1],
+        iguales: [6],
+        mayores: [8,7]
+    },
+
+    {
+        fase: "Comparación",
+        mensaje: "5 < 6. El valor 5 se agrega a menores.",
+        lista: [8,3,6,2,7,1,5],
+        actual: 6,
+        pivoteIndice: 2,
+        menores: [3,2,1,5],
+        iguales: [6],
+        mayores: [8,7]
+    },
+
+    {
+        fase: "Partición completa",
+        mensaje: "La lista quedó dividida en menores, iguales y mayores.",
+        lista: [8,3,6,2,7,1,5],
+        actual: -1,
+        pivoteIndice: 2,
+        menores: [3,2,1,5],
+        iguales: [6],
+        mayores: [8,7]
+    }
+
+];
+
+let pasoQuickActual = 0;
+let intervaloQuick = null;
+
+
+function crearElementoQuick(valor, tipo, activo) {
+
+    const elemento = document.createElement("span");
+
+    elemento.textContent = valor;
+
+    elemento.style.display = "inline-flex";
+    elemento.style.alignItems = "center";
+    elemento.style.justifyContent = "center";
+    elemento.style.width = "44px";
+    elemento.style.height = "44px";
+    elemento.style.borderRadius = "7px";
+    elemento.style.fontFamily = "Consolas, monospace";
+    elemento.style.fontWeight = "700";
+    elemento.style.transition = "all 0.3s";
+
+    if (tipo === "pivote") {
+
+        elemento.style.background = "#FBBF24";
+        elemento.style.color = "#1F2937";
+
+    } else if (tipo === "menor") {
+
+        elemento.style.background = "#3B82F6";
+        elemento.style.color = "#FFFFFF";
+
+    } else if (tipo === "mayor") {
+
+        elemento.style.background = "#10B981";
+        elemento.style.color = "#FFFFFF";
+
+    } else {
+
+        elemento.style.background = "#6B7280";
+        elemento.style.color = "#FFFFFF";
+    }
+
+    if (activo) {
+
+        elemento.style.transform = "scale(1.16)";
+        elemento.style.boxShadow = "0 0 0 4px rgba(251,191,36,0.35)";
+    }
+
+    return elemento;
+}
+
+
+function mostrarPasoQuick() {
+
+    const paso = pasosQuick[pasoQuickActual];
+
+    document.getElementById("faseQuick").textContent = paso.fase;
+    document.getElementById("mensajeQuick").textContent = paso.mensaje;
+    document.getElementById("valorPivoteQuick").textContent =
+        paso.lista[paso.pivoteIndice];
+
+    const listaVisual = document.getElementById("listaQuickVisual");
+    const menoresVisual = document.getElementById("menoresQuick");
+    const igualesVisual = document.getElementById("igualesQuick");
+    const mayoresVisual = document.getElementById("mayoresQuick");
+
+    listaVisual.innerHTML = "";
+    menoresVisual.innerHTML = "";
+    igualesVisual.innerHTML = "";
+    mayoresVisual.innerHTML = "";
+
+    paso.lista.forEach(function(valor, indice) {
+
+        let tipo = "normal";
+
+        if (indice === paso.pivoteIndice) {
+            tipo = "pivote";
+        }
+
+        listaVisual.appendChild(
+            crearElementoQuick(
+                valor,
+                tipo,
+                indice === paso.actual
+            )
+        );
+    });
+
+
+    if (paso.menores.length === 0) {
+
+        menoresVisual.innerHTML =
+            '<span style="font-family:Consolas,monospace;color:#6B7280;">[]</span>';
+
+    } else {
+
+        paso.menores.forEach(function(valor) {
+            menoresVisual.appendChild(
+                crearElementoQuick(valor, "menor", false)
+            );
+        });
+    }
+
+
+    if (paso.iguales.length === 0) {
+
+        igualesVisual.innerHTML =
+            '<span style="font-family:Consolas,monospace;color:#6B7280;">[]</span>';
+
+    } else {
+
+        paso.iguales.forEach(function(valor) {
+            igualesVisual.appendChild(
+                crearElementoQuick(valor, "pivote", false)
+            );
+        });
+    }
+
+
+    if (paso.mayores.length === 0) {
+
+        mayoresVisual.innerHTML =
+            '<span style="font-family:Consolas,monospace;color:#6B7280;">[]</span>';
+
+    } else {
+
+        paso.mayores.forEach(function(valor) {
+            mayoresVisual.appendChild(
+                crearElementoQuick(valor, "mayor", false)
+            );
+        });
+    }
+}
+
+
+function siguienteQuick() {
+
+    detenerAutomaticoQuick();
+
+    if (pasoQuickActual < pasosQuick.length - 1) {
+
+        pasoQuickActual++;
+
+        mostrarPasoQuick();
+    }
+}
+
+
+function anteriorQuick() {
+
+    detenerAutomaticoQuick();
+
+    if (pasoQuickActual > 0) {
+
+        pasoQuickActual--;
+
+        mostrarPasoQuick();
+    }
+}
+
+
+function reiniciarQuick() {
+
+    detenerAutomaticoQuick();
+
+    pasoQuickActual = 0;
+
+    mostrarPasoQuick();
+}
+
+
+function automaticoQuick() {
+
+    detenerAutomaticoQuick();
+
+    if (pasoQuickActual >= pasosQuick.length - 1) {
+
+        pasoQuickActual = 0;
+
+        mostrarPasoQuick();
+    }
+
+    intervaloQuick = setInterval(function() {
+
+        if (pasoQuickActual < pasosQuick.length - 1) {
+
+            pasoQuickActual++;
+
+            mostrarPasoQuick();
+
+        } else {
+
+            detenerAutomaticoQuick();
+        }
+
+    }, 1400);
+}
+
+
+function detenerAutomaticoQuick() {
+
+    if (intervaloQuick !== null) {
+
+        clearInterval(intervaloQuick);
+
+        intervaloQuick = null;
+    }
+}
+
+
+/* INICIALIZAR */
+mostrarPasoQuick();
+</script>
+</p>
+</div>
+</div>
+</div>
+</article>
+</div></main><div class="nav-buttons">
+<a href="../html/3-implementacion-de-merge-sort-en-python.html" title="Anterior" class="nav-button nav-button-left"><span>Anterior</span></a>
+<a href="../html/5-heap-sort-y-estructura-heap.html" title="Siguiente" class="nav-button nav-button-right"><span>Siguiente</span></a>
+</div>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by/4.0/" class="license">Creative Commons: Reconocimiento 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

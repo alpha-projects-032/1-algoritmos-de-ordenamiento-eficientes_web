@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muoxd4ab-oq70u8zkq">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by/4.0/">
+<title>3. Implementación de Merge Sort en Python | 1. Algoritmos de Ordenamiento Eficientes</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+</head>
+<body class="exe-export exe-web-site">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><a href="#page-muoxd4ab-oq70u8zkq" id="skipNav">Skip to content</a> <nav id="siteNav">
+<ul>
+<li> <a href="../index.html" class="main-node no-ch">Inicio</a>
+</li>
+<li> <a href="../html/1-fundamentos-de-los-ordenamientos-eficientes.html" class="no-ch">1. Fundamentos de los ordenamientos eficientes</a>
+</li>
+<li> <a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" class="no-ch">2. Merge Sort: estrategia y funcionamiento</a>
+</li>
+<li class="active"> <a href="../html/3-implementacion-de-merge-sort-en-python.html" class="active no-ch">3. Implementación de Merge Sort en Python</a>
+</li>
+<li> <a href="../html/4-quick-sort-y-particionamiento.html" class="no-ch">4. Quick Sort y particionamiento</a>
+</li>
+<li> <a href="../html/5-heap-sort-y-estructura-heap.html" class="no-ch">5. Heap Sort y estructura Heap</a>
+</li>
+<li> <a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" class="no-ch">6. Comparación y selección de algoritmos eficientes</a>
+</li>
+<li> <a href="../html/repaso-algoritmos-de-ordenamiento-eficientes.html" class="no-ch">Repaso: Algoritmos de Ordenamiento Eficientes</a>
+</li>
+</ul>
+</nav><main id="page-muoxd4ab-oq70u8zkq" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">1. Algoritmos de Ordenamiento Eficientes</p></div>
+<div class="page-header"><h1 class="page-title">3. Implementación de Merge Sort en Python</h1></div>
+</header><div id="page-content-page-muoxd4ab-oq70u8zkq" class="page-content">
+<article id="block-muoy8u4g-pxh10j1lt" class="box">
+<header class="box-head no-icon">
+<h1 class="box-title">Contenido</h1>
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790823787646-8ac4z81hq" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790823787646-8ac4z81hq&quot;}">
+<div class="exe-text-template">
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.65; max-width: 1200px; margin: 0 auto;"><!-- ENCABEZADO PRINCIPAL -->
+<div style="background: #3B82F6; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-bottom: 24px;">
+<div style="display: inline-block; background: #FBBF24; color: #1f2937; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 12px;">Ordenamientos eficientes</div>
+<h2 style="margin: 0 0 10px 0; color: #ffffff; font-size: 29px; font-weight: 600;">Implementación de Merge Sort en Python</h2>
+<p style="margin: 0; color: #ffffff; font-size: 17px;">Construir Merge Sort paso a paso mediante funciones, recursión, comparación de elementos y combinación de listas ordenadas.</p>
+</div>
+<!-- INTRODUCCIÓN -->
+<div style="background: #F9F9FB; border: 1px solid #E5E7EB; border-left: 6px solid #10B981; padding: 20px 24px; border-radius: 8px; margin-bottom: 30px;">
+<h3 style="color: #1f2937; margin: 0 0 12px 0; font-size: 22px;">Introducción</h3>
+<p style="margin: 0 0 12px 0;">Después de comprender cómo Merge Sort divide y combina una colección, el siguiente paso consiste en implementar el algoritmo completamente en Python.</p>
+<p style="margin: 0;">La solución puede organizarse mediante dos funciones: una encargada de dividir recursivamente la lista y otra responsable de combinar dos listas previamente ordenadas.</p>
+</div>
+<!-- 1. ESTRUCTURA GENERAL -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">1. Estructura general de Merge Sort</h3>
+<p>La implementación puede separarse en dos funciones con responsabilidades específicas.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def combinar(izquierda, derecha):
+    # Combina dos listas ordenadas
+    pass
+
+
+def merge_sort(lista):
+    # Divide la lista y utiliza combinar()
+    pass</code></pre>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 20px;">
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-top: 5px solid #3B82F6; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8; font-size: 18px;">merge_sort()</strong>
+<ul style="margin-bottom: 0;">
+<li>Verifica el caso base.</li>
+<li>Calcula el punto medio.</li>
+<li>Divide la lista.</li>
+<li>Realiza llamadas recursivas.</li>
+<li>Solicita la combinación.</li>
+</ul>
+</div>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-top: 5px solid #10B981; padding: 20px; border-radius: 9px;"><strong style="color: #047857; font-size: 18px;">combinar()</strong>
+<ul style="margin-bottom: 0;">
+<li>Compara elementos.</li>
+<li>Selecciona el menor.</li>
+<li>Construye el resultado.</li>
+<li>Agrega elementos restantes.</li>
+<li>Retorna la lista ordenada.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- 2. CONSTRUIR COMBINAR -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">2. Construcción de la función combinar()</h3>
+<p>La función comienza creando una lista vacía donde se almacenarán progresivamente los elementos ordenados.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def combinar(izquierda, derecha):
+    resultado = []</code></pre>
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 20px; border-radius: 9px; margin-top: 18px;"><strong style="color: #1d4ed8;">Ejemplo inicial</strong>
+<pre style="margin: 12px 0 0 0; font-family: Consolas, monospace;">izquierda = [3, 8]
+derecha   = [2, 6]
+
+resultado = []</pre>
+</div>
+</section>
+<!-- 3. ÍNDICES -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">3. Control de posiciones</h3>
+<p>Para recorrer ambas listas se utilizan los índices <code>i</code> y <code>j</code>.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>i = 0
+j = 0</code></pre>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px;">
+<div style="flex: 1 1 280px; background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8;">Índice i</strong>
+<pre style="margin-bottom: 0; font-family: Consolas, monospace;">izquierda = [3, 8]
+              ↑
+              i</pre>
+</div>
+<div style="flex: 1 1 280px; background: #ECFDF5; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">Índice j</strong>
+<pre style="margin-bottom: 0; font-family: Consolas, monospace;">derecha = [2, 6]
+            ↑
+            j</pre>
+</div>
+</div>
+</section>
+<!-- 4. COMPARACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">4. Comparación de elementos</h3>
+<p>Mientras existan elementos disponibles en ambas listas, se comparan los valores señalados por <code>i</code> y <code>j</code>.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>while i &lt; len(izquierda) and j &lt; len(derecha):
+
+    if izquierda[i] &lt; derecha[j]:
+        resultado.append(izquierda[i])
+        i += 1
+
+    else:
+        resultado.append(derecha[j])
+        j += 1</code></pre>
+<div style="background: #FFFBEB; border-left: 5px solid #FBBF24; padding: 18px 22px; border-radius: 8px; margin-top: 20px;">Solamente avanza el índice correspondiente al elemento que fue agregado a <code>resultado</code>.</div>
+</section>
+<!-- 5. SEGUIMIENTO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">5. Seguimiento de una combinación</h3>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 22px; border-radius: 9px;">
+<div style="font-family: Consolas, monospace; margin-bottom: 18px;">izquierda = [3, 8]<br />derecha = [2, 6]</div>
+<div style="display: grid; gap: 12px;">
+<div style="background: #FFFFFF; border-left: 5px solid #FBBF24; padding: 16px;"><strong>3 vs 2</strong> → se agrega 2. <br />resultado = <code>[2]</code></div>
+<div style="background: #FFFFFF; border-left: 5px solid #3B82F6; padding: 16px;"><strong>3 vs 6</strong> → se agrega 3. <br />resultado = <code>[2, 3]</code></div>
+<div style="background: #FFFFFF; border-left: 5px solid #10B981; padding: 16px;"><strong>8 vs 6</strong> → se agrega 6. <br />resultado = <code>[2, 3, 6]</code></div>
+<div style="background: #ECFDF5; border-left: 5px solid #10B981; padding: 16px;">La lista derecha termina. Se agrega el 8 restante. <br /><strong>resultado = [2, 3, 6, 8]</strong></div>
+</div>
+</div>
+</section>
+<!-- ANIMACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #10B981; padding-bottom: 9px; margin-bottom: 20px;">Animación: ejecución de combinar()</h3>
+<p>Avanza paso a paso para observar cómo cambian los índices y la lista resultado.</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 24px; border-radius: 10px;">
+<div style="text-align: center; margin-bottom: 18px;"><span id="tituloCombinar" style="display: inline-block; background: #3B82F6; color: #ffffff; padding: 7px 16px; border-radius: 20px; font-weight: bold;"> Inicio </span></div>
+<div id="mensajeCombinar" style="text-align: center; font-weight: 600; margin-bottom: 20px;">Preparando las listas.</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; padding: 18px; border-radius: 9px;"><strong style="color: #1d4ed8;">Izquierda</strong>
+<div id="listaIzquierdaVisual" style="display: flex; gap: 8px; margin-top: 14px;"></div>
+</div>
+<div style="background: #ECFDF5; padding: 18px; border-radius: 9px;"><strong style="color: #047857;">Derecha</strong>
+<div id="listaDerechaVisual" style="display: flex; gap: 8px; margin-top: 14px;"></div>
+</div>
+</div>
+<div style="background: #1F2937; color: #ffffff; padding: 20px; border-radius: 9px; margin-top: 18px;"><strong style="color: #fbbf24;">Resultado</strong>
+<div id="resultadoVisual" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; min-height: 42px;"></div>
+</div>
+<div style="margin-top: 18px; text-align: center;"><strong>i = <span id="valorI">0</span></strong>     <strong>j = <span id="valorJ">0</span></strong></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;"><button onclick="anteriorCombinar()" style="background: #6B7280; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Anterior </button> <button onclick="siguienteCombinar()" style="background: #3B82F6; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Siguiente paso </button> <button onclick="automaticoCombinar()" style="background: #10B981; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Automático </button> <button onclick="reiniciarCombinar()" style="background: #FBBF24; color: #1f2937; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Reiniciar </button></div>
+</div>
+</section>
+<!-- 6. ELEMENTOS RESTANTES -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">6. Agregar elementos restantes</h3>
+<p>Cuando una lista termina antes que la otra, los elementos pendientes pueden agregarse directamente.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>resultado.extend(izquierda[i:])
+resultado.extend(derecha[j:])</code></pre>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; padding: 18px 22px; border-radius: 8px; margin-top: 18px;">Como las listas de entrada ya están ordenadas, los valores restantes pueden incorporarse sin realizar nuevas comparaciones entre ambas listas.</div>
+</section>
+<!-- 7. FUNCIÓN COMBINAR COMPLETA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">7. Función combinar() completa</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def combinar(izquierda, derecha):
+    resultado = []
+
+    i = 0
+    j = 0
+
+    while i &lt; len(izquierda) and j &lt; len(derecha):
+
+        if izquierda[i] &lt; derecha[j]:
+            resultado.append(izquierda[i])
+            i += 1
+        else:
+            resultado.append(derecha[j])
+            j += 1
+
+    resultado.extend(izquierda[i:])
+    resultado.extend(derecha[j:])
+
+    return resultado</code></pre>
+</section>
+<!-- 8. PRUEBA COMBINAR -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">8. Prueba independiente de combinar()</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>lista1 = [2, 5, 8]
+lista2 = [1, 3, 7]
+
+resultado = combinar(lista1, lista2)
+
+print(resultado)</code></pre>
+<div style="background: #ECFDF5; border-left: 5px solid #10B981; padding: 18px 22px; border-radius: 8px;"><strong>Resultado:</strong> <code>[1, 2, 3, 5, 7, 8]</code></div>
+</section>
+<!-- 9. MERGE SORT -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">9. Construcción de merge_sort()</h3>
+<p>La función principal comienza verificando el caso base.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def merge_sort(lista):
+
+    if len(lista) &lt;= 1:
+        return lista</code></pre>
+<div style="background: #FFFBEB; border-left: 5px solid #FBBF24; padding: 18px 22px; border-radius: 8px; margin-top: 18px;">Cuando la lista tiene uno o ningún elemento, se considera ordenada y termina la llamada recursiva.</div>
+</section>
+<!-- 10. PUNTO MEDIO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">10. Calcular el punto medio</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>mitad = len(lista) // 2</code></pre>
+<div style="background: #EFF6FF; padding: 20px; border-radius: 8px; margin-top: 18px;">
+<pre style="margin: 0; font-family: Consolas, monospace;">lista = [8, 3, 6, 2, 7, 1]
+
+len(lista) = 6
+
+6 // 2 = 3
+
+mitad = 3</pre>
+</div>
+</section>
+<!-- 11. DIVISIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">11. Dividir la lista</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>izquierda = lista[:mitad]
+derecha = lista[mitad:]</code></pre>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px;">
+<div style="flex: 1 1 280px; background: #EFF6FF; padding: 20px; border-radius: 8px;"><strong>Izquierda</strong>
+<div style="font-family: Consolas, monospace; margin-top: 10px;">[8, 3, 6]</div>
+</div>
+<div style="flex: 1 1 280px; background: #ECFDF5; padding: 20px; border-radius: 8px;"><strong>Derecha</strong>
+<div style="font-family: Consolas, monospace; margin-top: 10px;">[2, 7, 1]</div>
+</div>
+</div>
+</section>
+<!-- 12. RECURSIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">12. Aplicar recursión</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>izquierda = merge_sort(izquierda)
+derecha = merge_sort(derecha)</code></pre>
+<div style="background: #1F2937; color: #ffffff; padding: 22px; border-radius: 9px; text-align: center; font-family: Consolas, monospace; margin-top: 18px;">merge_sort([8, 3, 6]) <br /><br />↓ <br /><br />merge_sort([8])    merge_sort([3, 6]) <br /><br />↓ <br /><br />merge_sort([3])    merge_sort([6])</div>
+</section>
+<!-- 13. COMBINACIÓN FINAL -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">13. Combinar los resultados</h3>
+<p>Una vez ordenadas ambas partes, se envían a la función <code>combinar()</code>.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>return combinar(izquierda, derecha)</code></pre>
+</section>
+<!-- 14. IMPLEMENTACIÓN COMPLETA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">14. Implementación completa</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def combinar(izquierda, derecha):
+    resultado = []
+
+    i = 0
+    j = 0
+
+    while i &lt; len(izquierda) and j &lt; len(derecha):
+
+        if izquierda[i] &lt; derecha[j]:
+            resultado.append(izquierda[i])
+            i += 1
+        else:
+            resultado.append(derecha[j])
+            j += 1
+
+    resultado.extend(izquierda[i:])
+    resultado.extend(derecha[j:])
+
+    return resultado
+
+
+def merge_sort(lista):
+
+    if len(lista) &lt;= 1:
+        return lista
+
+    mitad = len(lista) // 2
+
+    izquierda = lista[:mitad]
+    derecha = lista[mitad:]
+
+    izquierda = merge_sort(izquierda)
+    derecha = merge_sort(derecha)
+
+    return combinar(izquierda, derecha)
+
+
+numeros = [8, 3, 6, 2, 7, 1, 5, 4]
+
+resultado = merge_sort(numeros)
+
+print(resultado)</code></pre>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; padding: 18px 22px; border-radius: 8px; margin-top: 18px;"><strong style="color: #047857;">Resultado</strong>
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[1, 2, 3, 4, 5, 6, 7, 8]</div>
+</div>
+</section>
+<!-- 15. SEGUIMIENTO CON PRINT -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">15. Seguimiento de ejecución con print()</h3>
+<p>Podemos agregar mensajes para observar el proceso de combinación mientras se ejecuta el programa.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>def combinar(izquierda, derecha):
+    resultado = []
+
+    i = 0
+    j = 0
+
+    while i &lt; len(izquierda) and j &lt; len(derecha):
+
+        if izquierda[i] &lt; derecha[j]:
+            resultado.append(izquierda[i])
+            i += 1
+        else:
+            resultado.append(derecha[j])
+            j += 1
+
+    resultado.extend(izquierda[i:])
+    resultado.extend(derecha[j:])
+
+    print(&quot;Combinando:&quot;, izquierda, &quot;+&quot;, derecha)
+    print(&quot;Resultado:&quot;, resultado)
+
+    return resultado</code></pre>
+</section>
+<!-- 16. LISTA ORIGINAL -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">16. Lista original y resultado</h3>
+<p>Esta implementación construye nuevas listas durante el proceso, por lo que la lista original permanece disponible.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; font-size: 14px; padding: 22px; overflow: auto;"><code>numeros = [8, 3, 6, 2]
+
+resultado = merge_sort(numeros)
+
+print(&quot;Original:&quot;, numeros)
+print(&quot;Ordenada:&quot;, resultado)</code></pre>
+<div style="background: #EFF6FF; padding: 18px 22px; border-radius: 8px;">
+<pre style="margin: 0; font-family: Consolas, monospace;">Original: [8, 3, 6, 2]
+Ordenada: [2, 3, 6, 8]</pre>
+</div>
+</section>
+<!-- 17. PRUEBAS -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">17. Pruebas con diferentes datos</h3>
+<p>Un algoritmo debe comprobarse utilizando diferentes escenarios de entrada.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px;">
+<div style="background: #EFF6FF; padding: 16px; border-radius: 8px;"><strong>Desordenada</strong>
+<pre style="margin-bottom: 0;">[9, 4, 2, 8, 1]</pre>
+</div>
+<div style="background: #ECFDF5; padding: 16px; border-radius: 8px;"><strong>Ya ordenada</strong>
+<pre style="margin-bottom: 0;">[1, 2, 3, 4, 5]</pre>
+</div>
+<div style="background: #FFFBEB; padding: 16px; border-radius: 8px;"><strong>Descendente</strong>
+<pre style="margin-bottom: 0;">[5, 4, 3, 2, 1]</pre>
+</div>
+<div style="background: #EFF6FF; padding: 16px; border-radius: 8px;"><strong>Repetidos</strong>
+<pre style="margin-bottom: 0;">[5, 2, 5, 1, 2, 8]</pre>
+</div>
+<div style="background: #ECFDF5; padding: 16px; border-radius: 8px;"><strong>Negativos</strong>
+<pre style="margin-bottom: 0;">[4, -2, 7, -8, 1, 0]</pre>
+</div>
+<div style="background: #FFFBEB; padding: 16px; border-radius: 8px;"><strong>Lista vacía</strong>
+<pre style="margin-bottom: 0;">[]</pre>
+</div>
+</div>
+</section>
+<!-- PRÁCTICA 1 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 1. Completar el algoritmo</h3>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 22px; border-radius: 9px;">
+<p>Completa las instrucciones faltantes antes de comprobar la solución.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px; overflow: auto;"><code>def merge_sort(lista):
+
+    if len(lista) &lt;= 1:
+        return lista
+
+    mitad = __________
+
+    izquierda = lista[:mitad]
+    derecha = __________
+
+    izquierda = merge_sort(__________)
+    derecha = merge_sort(__________)
+
+    return combinar(__________, __________)</code></pre>
+</div>
+</section>
+<!-- PRÁCTICA 2 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 2. Predecir el resultado</h3>
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 22px; border-radius: 9px;">
+<pre style="background: #1F2937; color: #ffffff; padding: 18px; border-radius: 7px;"><code>numeros = [12, 5, 9, 3]</code></pre>
+<ol style="margin-bottom: 0;">
+<li>Determina la primera división.</li>
+<li>Continúa hasta obtener listas individuales.</li>
+<li>Determina las primeras combinaciones.</li>
+<li>Obtén la lista final.</li>
+<li>Comprueba posteriormente el resultado con Python.</li>
+</ol>
+</div>
+</section>
+<!-- PRÁCTICA 3 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 3. Orden descendente</h3>
+<p>La comparación original es:</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 18px; border-radius: 8px;"><code>if izquierda[i] &lt; derecha[j]:</code></pre>
+<p>Modifícala por:</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 18px; border-radius: 8px;"><code>if izquierda[i] &gt; derecha[j]:</code></pre>
+<div style="background: #FFFBEB; border-left: 5px solid #FBBF24; padding: 18px 22px; border-radius: 8px;">Ejecuta nuevamente el algoritmo y analiza cómo cambia el criterio de ordenamiento.</div>
+</section>
+<!-- PRÁCTICA 4 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 4. Contar combinaciones</h3>
+<p>Agrega un contador para observar cuántas veces se ejecuta la función <code>combinar()</code>.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px; overflow: auto;"><code>combinaciones = 0
+
+
+def combinar(izquierda, derecha):
+    global combinaciones
+
+    combinaciones += 1
+
+    resultado = []
+
+    i = 0
+    j = 0
+
+    while i &lt; len(izquierda) and j &lt; len(derecha):
+
+        if izquierda[i] &lt; derecha[j]:
+            resultado.append(izquierda[i])
+            i += 1
+        else:
+            resultado.append(derecha[j])
+            j += 1
+
+    resultado.extend(izquierda[i:])
+    resultado.extend(derecha[j:])
+
+    return resultado</code></pre>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px; overflow: auto; margin-top: 18px;"><code>numeros = [8, 3, 6, 2, 7, 1, 5, 4]
+
+resultado = merge_sort(numeros)
+
+print(resultado)
+print(&quot;Combinaciones realizadas:&quot;, combinaciones)</code></pre>
+</section>
+<!-- SÍNTESIS -->
+<div style="background: #1F2937; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-top: 30px;">
+<h3 style="margin: 0 0 12px 0; color: #fbbf24; font-size: 22px;">Síntesis</h3>
+<p style="margin: 0 0 10px 0;">La implementación de Merge Sort puede dividirse en dos responsabilidades: <code>merge_sort()</code> controla la división recursiva y <code>combinar()</code> reconstruye las listas de forma ordenada.</p>
+<p style="margin: 0;">Comprender el caso base, los índices, las comparaciones, la recursión y la construcción progresiva del resultado permite interpretar el algoritmo más allá de simplemente ejecutar su código.</p>
+</div>
+</div>
+<p>
+<script>
+/* =====================================================
+   ANIMACIÓN DE LA FUNCIÓN combinar()
+   ===================================================== */
+
+const pasosCombinar = [
+    {
+        titulo: "Inicio",
+        mensaje: "Preparando las listas.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 0,
+        j: 0,
+        resultado: [],
+        activoI: 0,
+        activoJ: 0
+    },
+    {
+        titulo: "Comparación",
+        mensaje: "Se comparan 3 y 2. El menor es 2.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 0,
+        j: 0,
+        resultado: [],
+        activoI: 0,
+        activoJ: 0
+    },
+    {
+        titulo: "Agregar",
+        mensaje: "Se agrega 2 al resultado y avanza j.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 0,
+        j: 1,
+        resultado: [2],
+        activoI: 0,
+        activoJ: 1
+    },
+    {
+        titulo: "Comparación",
+        mensaje: "Se comparan 3 y 6. El menor es 3.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 0,
+        j: 1,
+        resultado: [2],
+        activoI: 0,
+        activoJ: 1
+    },
+    {
+        titulo: "Agregar",
+        mensaje: "Se agrega 3 al resultado y avanza i.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 1,
+        j: 1,
+        resultado: [2,3],
+        activoI: 1,
+        activoJ: 1
+    },
+    {
+        titulo: "Comparación",
+        mensaje: "Se comparan 8 y 6. El menor es 6.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 1,
+        j: 1,
+        resultado: [2,3],
+        activoI: 1,
+        activoJ: 1
+    },
+    {
+        titulo: "Agregar",
+        mensaje: "Se agrega 6. La lista derecha termina.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 1,
+        j: 2,
+        resultado: [2,3,6],
+        activoI: 1,
+        activoJ: -1
+    },
+    {
+        titulo: "Restante",
+        mensaje: "Se agrega el elemento restante de la lista izquierda.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 2,
+        j: 2,
+        resultado: [2,3,6,8],
+        activoI: -1,
+        activoJ: -1
+    },
+    {
+        titulo: "Final",
+        mensaje: "La combinación ha terminado.",
+        izquierda: [3,8],
+        derecha: [2,6],
+        i: 2,
+        j: 2,
+        resultado: [2,3,6,8],
+        activoI: -1,
+        activoJ: -1
+    }
+];
+
+let pasoCombinarActual = 0;
+let intervaloCombinar = null;
+
+
+function crearElementoVisual(valor, activo, tipo) {
+
+    const elemento = document.createElement("span");
+
+    elemento.textContent = valor;
+
+    elemento.style.display = "inline-flex";
+    elemento.style.alignItems = "center";
+    elemento.style.justifyContent = "center";
+    elemento.style.width = "44px";
+    elemento.style.height = "44px";
+    elemento.style.borderRadius = "7px";
+    elemento.style.fontFamily = "Consolas, monospace";
+    elemento.style.fontWeight = "700";
+    elemento.style.transition = "all 0.3s";
+
+    if (activo) {
+        elemento.style.background = "#FBBF24";
+        elemento.style.color = "#1F2937";
+        elemento.style.transform = "scale(1.1)";
+        elemento.style.boxShadow = "0 0 0 3px rgba(251,191,36,0.25)";
+    } else if (tipo === "izquierda") {
+        elemento.style.background = "#3B82F6";
+        elemento.style.color = "#FFFFFF";
+    } else if (tipo === "derecha") {
+        elemento.style.background = "#10B981";
+        elemento.style.color = "#FFFFFF";
+    } else {
+        elemento.style.background = "#047857";
+        elemento.style.color = "#FFFFFF";
+    }
+
+    return elemento;
+}
+
+
+function mostrarPasoCombinar() {
+
+    const paso = pasosCombinar[pasoCombinarActual];
+
+    document.getElementById("tituloCombinar").textContent = paso.titulo;
+    document.getElementById("mensajeCombinar").textContent = paso.mensaje;
+
+    document.getElementById("valorI").textContent = paso.i;
+    document.getElementById("valorJ").textContent = paso.j;
+
+    const izq = document.getElementById("listaIzquierdaVisual");
+    const der = document.getElementById("listaDerechaVisual");
+    const res = document.getElementById("resultadoVisual");
+
+    izq.innerHTML = "";
+    der.innerHTML = "";
+    res.innerHTML = "";
+
+    paso.izquierda.forEach(function(valor, indice) {
+        izq.appendChild(
+            crearElementoVisual(valor, indice === paso.activoI, "izquierda")
+        );
+    });
+
+    paso.derecha.forEach(function(valor, indice) {
+        der.appendChild(
+            crearElementoVisual(valor, indice === paso.activoJ, "derecha")
+        );
+    });
+
+    if (paso.resultado.length === 0) {
+
+        const vacio = document.createElement("span");
+
+        vacio.textContent = "[]";
+        vacio.style.fontFamily = "Consolas, monospace";
+        vacio.style.color = "#D1D5DB";
+        vacio.style.fontSize = "18px";
+
+        res.appendChild(vacio);
+
+    } else {
+
+        paso.resultado.forEach(function(valor) {
+            res.appendChild(
+                crearElementoVisual(valor, false, "resultado")
+            );
+        });
+
+    }
+}
+
+
+function siguienteCombinar() {
+
+    detenerAutomaticoCombinar();
+
+    if (pasoCombinarActual < pasosCombinar.length - 1) {
+
+        pasoCombinarActual++;
+
+        mostrarPasoCombinar();
+    }
+}
+
+
+function anteriorCombinar() {
+
+    detenerAutomaticoCombinar();
+
+    if (pasoCombinarActual > 0) {
+
+        pasoCombinarActual--;
+
+        mostrarPasoCombinar();
+    }
+}
+
+
+function reiniciarCombinar() {
+
+    detenerAutomaticoCombinar();
+
+    pasoCombinarActual = 0;
+
+    mostrarPasoCombinar();
+}
+
+
+function automaticoCombinar() {
+
+    detenerAutomaticoCombinar();
+
+    if (pasoCombinarActual >= pasosCombinar.length - 1) {
+
+        pasoCombinarActual = 0;
+
+        mostrarPasoCombinar();
+    }
+
+    intervaloCombinar = setInterval(function() {
+
+        if (pasoCombinarActual < pasosCombinar.length - 1) {
+
+            pasoCombinarActual++;
+
+            mostrarPasoCombinar();
+
+        } else {
+
+            detenerAutomaticoCombinar();
+
+        }
+
+    }, 1400);
+}
+
+
+function detenerAutomaticoCombinar() {
+
+    if (intervaloCombinar !== null) {
+
+        clearInterval(intervaloCombinar);
+
+        intervaloCombinar = null;
+    }
+}
+
+
+/* INICIALIZACIÓN */
+mostrarPasoCombinar();
+</script>
+</p>
+</div>
+</div>
+</div>
+</article>
+</div></main><div class="nav-buttons">
+<a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" title="Anterior" class="nav-button nav-button-left"><span>Anterior</span></a>
+<a href="../html/4-quick-sort-y-particionamiento.html" title="Siguiente" class="nav-button nav-button-right"><span>Siguiente</span></a>
+</div>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by/4.0/" class="license">Creative Commons: Reconocimiento 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>

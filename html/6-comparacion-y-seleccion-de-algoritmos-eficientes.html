@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es" id="exe-page-muoxdtzt-zvactogc7">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="eXeLearning v4.0.5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="license" type="text/html" href="https://creativecommons.org/licenses/by/4.0/">
+<title>6. Comparación y selección de algoritmos eficientes | 1. Algoritmos de Ordenamiento Eficientes</title>
+<link rel="icon" type="image/x-icon" href="../libs/favicon.ico">
+<script>document.querySelector("html").classList.add("js");</script><script src="../libs/jquery/jquery.min.js"> </script><script src="../libs/common_i18n.js"> </script><script src="../libs/common.js"> </script><script src="../libs/exe_export.js"> </script><script src="../libs/bootstrap/bootstrap.bundle.min.js"> </script><link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css">
+<script src="../idevices/text/text.js"></script><link rel="stylesheet" href="../idevices/text/text.css">
+<link rel="stylesheet" href="../content/css/base.css"><script src="../theme/style.js"> </script><link rel="stylesheet" href="../theme/style.css">
+</head>
+<body class="exe-export exe-web-site">
+<script>document.body.className+=" js"</script>
+<div class="exe-content exe-export pre-js siteNav-hidden"><a href="#page-muoxdtzt-zvactogc7" id="skipNav">Skip to content</a> <nav id="siteNav">
+<ul>
+<li> <a href="../index.html" class="main-node no-ch">Inicio</a>
+</li>
+<li> <a href="../html/1-fundamentos-de-los-ordenamientos-eficientes.html" class="no-ch">1. Fundamentos de los ordenamientos eficientes</a>
+</li>
+<li> <a href="../html/2-merge-sort-estrategia-y-funcionamiento.html" class="no-ch">2. Merge Sort: estrategia y funcionamiento</a>
+</li>
+<li> <a href="../html/3-implementacion-de-merge-sort-en-python.html" class="no-ch">3. Implementación de Merge Sort en Python</a>
+</li>
+<li> <a href="../html/4-quick-sort-y-particionamiento.html" class="no-ch">4. Quick Sort y particionamiento</a>
+</li>
+<li> <a href="../html/5-heap-sort-y-estructura-heap.html" class="no-ch">5. Heap Sort y estructura Heap</a>
+</li>
+<li class="active"> <a href="../html/6-comparacion-y-seleccion-de-algoritmos-eficientes.html" class="active no-ch">6. Comparación y selección de algoritmos eficientes</a>
+</li>
+<li> <a href="../html/repaso-algoritmos-de-ordenamiento-eficientes.html" class="no-ch">Repaso: Algoritmos de Ordenamiento Eficientes</a>
+</li>
+</ul>
+</nav><main id="page-muoxdtzt-zvactogc7" class="page"> 
+<header class="main-header">
+<div class="package-header"><p class="package-title">1. Algoritmos de Ordenamiento Eficientes</p></div>
+<div class="page-header"><h1 class="page-title">6. Comparación y selección de algoritmos eficientes</h1></div>
+</header><div id="page-content-page-muoxdtzt-zvactogc7" class="page-content">
+<article id="block-muoysj5f-nsz0stqmc" class="box">
+<header class="box-head no-icon">
+<h1 class="box-title">Contenido</h1>
+<button class="box-toggle box-toggle-on" title="Toggle content">
+<span>Toggle content</span>
+</button></header>
+<div class="box-content">
+<div id="idevice-1790824706544-3ei1kw42g" class="idevice_node text" data-idevice-path="../idevices/text/" data-idevice-type="text" data-idevice-component-type="json" data-idevice-json-data="{&quot;ideviceId&quot;:&quot;idevice-1790824706544-3ei1kw42g&quot;}">
+<div class="exe-text-template">
+    <div style="font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.65; max-width: 1200px; margin: 0 auto;"><!-- ENCABEZADO PRINCIPAL -->
+<div style="background: #3B82F6; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-bottom: 24px;">
+<div style="display: inline-block; background: #FBBF24; color: #1f2937; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 12px;">Ordenamientos eficientes</div>
+<h2 style="margin: 0 0 10px 0; color: #ffffff; font-size: 29px; font-weight: 600;">Comparación y selección de algoritmos eficientes</h2>
+<p style="margin: 0; color: #ffffff; font-size: 17px;">Comparar Merge Sort, Quick Sort y Heap Sort considerando complejidad, memoria, estabilidad y características del problema.</p>
+</div>
+<!-- INTRODUCCIÓN -->
+<div style="background: #F9F9FB; border: 1px solid #E5E7EB; border-left: 6px solid #10B981; padding: 20px 24px; border-radius: 8px; margin-bottom: 30px;">
+<h3 style="color: #1f2937; margin: 0 0 12px 0; font-size: 22px;">Introducción</h3>
+<p style="margin: 0 0 12px 0;">Merge Sort, Quick Sort y Heap Sort pueden utilizarse para resolver problemas de ordenamiento de forma eficiente, pero cada uno emplea una estrategia diferente.</p>
+<p style="margin: 0;">La selección del algoritmo debe considerar el rendimiento esperado, la memoria disponible, la estabilidad y las características de los datos.</p>
+</div>
+<!-- 1. TRES ESTRATEGIAS -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">1. Tres estrategias diferentes</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-top: 5px solid #3B82F6; padding: 20px; border-radius: 9px;">
+<h4 style="color: #1d4ed8; margin-top: 0;">Merge Sort</h4>
+<p>Divide la colección, ordena las partes y posteriormente las combina.</p>
+<div style="background: #FFFFFF; padding: 12px; border-radius: 7px; text-align: center;">Dividir → Ordenar → Combinar</div>
+</div>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; border-top: 5px solid #FBBF24; padding: 20px; border-radius: 9px;">
+<h4 style="color: #92400e; margin-top: 0;">Quick Sort</h4>
+<p>Selecciona un pivote y distribuye los elementos alrededor de él.</p>
+<div style="background: #FFFFFF; padding: 12px; border-radius: 7px; text-align: center;">Pivote → Particionar → Ordenar</div>
+</div>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-top: 5px solid #10B981; padding: 20px; border-radius: 9px;">
+<h4 style="color: #047857; margin-top: 0;">Heap Sort</h4>
+<p>Construye un Heap y extrae progresivamente el elemento de mayor prioridad.</p>
+<div style="background: #FFFFFF; padding: 12px; border-radius: 7px; text-align: center;">Heap → Extraer → Restaurar</div>
+</div>
+</div>
+</section>
+<!-- 2. COMPLEJIDAD -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">2. Comparación de complejidad temporal</h3>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 700px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB;">Algoritmo</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Mejor caso</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Promedio</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Peor caso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"><strong>Merge Sort</strong></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;"><strong>Quick Sort</strong></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n²)</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"><strong>Heap Sort</strong></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">O(n log n)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 3. MEMORIA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">3. Comparación del uso de memoria</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8;">Merge Sort</strong>
+<p>En la implementación trabajada crea listas auxiliares para dividir y combinar los datos.</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 14px; border-radius: 7px; overflow: auto;"><code>izquierda = lista[:mitad]
+derecha = lista[mitad:]
+resultado = []</code></pre>
+</div>
+<div style="background: #FFFBEB; padding: 20px; border-radius: 9px;"><strong style="color: #92400e;">Quick Sort</strong>
+<p>Nuestra versión didáctica utiliza tres listas auxiliares.</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 14px; border-radius: 7px; overflow: auto;"><code>menores = []
+iguales = []
+mayores = []</code></pre>
+</div>
+<div style="background: #ECFDF5; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">Heap Sort</strong>
+<p>Reorganiza principalmente los elementos dentro de la misma lista.</p>
+<pre style="background: #1F2937; color: #ffffff; padding: 14px; border-radius: 7px; overflow: auto;"><code>lista[i], lista[mayor] = \
+lista[mayor], lista[i]</code></pre>
+</div>
+</div>
+</section>
+<!-- 4. ESTABILIDAD -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">4. Estabilidad</h3>
+<p>Un algoritmo de ordenamiento es <strong>estable</strong> cuando conserva el orden relativo original de elementos que poseen la misma clave.</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 20px; border-radius: 9px;">
+<div style="font-family: Consolas, monospace;">Ana      85<br />Carlos   90<br />Marta    85</div>
+<div style="font-size: 26px; color: #3b82f6; text-align: center; margin: 12px;">↓</div>
+<div style="font-family: Consolas, monospace;">Ana      85<br />Marta    85<br />Carlos   90</div>
+</div>
+<div style="overflow-x: auto; margin-top: 20px;">
+<table style="width: 100%; border-collapse: collapse; min-width: 500px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB;">Algoritmo</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Estabilidad típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Merge Sort</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">Sí</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Quick Sort</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">No necesariamente</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Heap Sort</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB; text-align: center;">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 5. MODIFICACIÓN DE LISTA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">5. Modificación de la lista original</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; padding: 18px; border-radius: 8px;"><strong style="color: #1d4ed8;">Merge Sort</strong>
+<pre style="font-family: Consolas, monospace;">resultado = merge_sort(numeros)</pre>
+<p style="margin-bottom: 0;">Nuestra versión genera una nueva lista.</p>
+</div>
+<div style="background: #FFFBEB; padding: 18px; border-radius: 8px;"><strong style="color: #92400e;">Quick Sort</strong>
+<pre style="font-family: Consolas, monospace;">resultado = quick_sort(numeros)</pre>
+<p style="margin-bottom: 0;">Nuestra versión también genera una nueva lista.</p>
+</div>
+<div style="background: #ECFDF5; padding: 18px; border-radius: 8px;"><strong style="color: #047857;">Heap Sort</strong>
+<pre style="font-family: Consolas, monospace;">heap_sort(numeros)</pre>
+<p style="margin-bottom: 0;">Modifica directamente la lista.</p>
+</div>
+</div>
+</section>
+<!-- 6. TABLA GENERAL -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">6. Comparación general</h3>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 900px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB; text-align: left;">Característica</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Merge Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Quick Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Heap Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Estrategia</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Dividir y combinar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Particionar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Heap</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Promedio</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Peor caso</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n²)</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">O(n log n)</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Memoria auxiliar</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Mayor</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Mayor en nuestra versión</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Reducida</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Estabilidad típica</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Sí</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">No</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">No</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Operación principal</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Merge</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Partición</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Heapify</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 7. CUÁNDO USAR -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">7. Criterios de selección</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+<div style="background: #EFF6FF; border-top: 5px solid #3B82F6; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8; font-size: 18px;">Merge Sort</strong>
+<ul style="margin-bottom: 0;">
+<li>Se necesita estabilidad.</li>
+<li>Se requiere O(n log n) predecible.</li>
+<li>La memoria adicional es aceptable.</li>
+</ul>
+</div>
+<div style="background: #FFFBEB; border-top: 5px solid #FBBF24; padding: 20px; border-radius: 9px;"><strong style="color: #92400e; font-size: 18px;">Quick Sort</strong>
+<ul style="margin-bottom: 0;">
+<li>Se busca buen rendimiento promedio.</li>
+<li>Puede utilizarse una buena estrategia de pivote.</li>
+<li>El peor caso puede mitigarse.</li>
+</ul>
+</div>
+<div style="background: #ECFDF5; border-top: 5px solid #10B981; padding: 20px; border-radius: 9px;"><strong style="color: #047857; font-size: 18px;">Heap Sort</strong>
+<ul style="margin-bottom: 0;">
+<li>La memoria auxiliar debe limitarse.</li>
+<li>Se requiere O(n log n) en el peor caso.</li>
+<li>No se necesita estabilidad.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- 8. ÁRBOL DE DECISIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">8. Árbol de decisión conceptual</h3>
+<div style="background: #1F2937; color: #ffffff; padding: 24px; border-radius: 9px; text-align: center;">
+<div style="background: #3B82F6; display: inline-block; padding: 12px 18px; border-radius: 8px;">¿Necesitamos estabilidad?</div>
+<div style="font-size: 24px; margin: 10px;">↓ Sí</div>
+<div style="background: #2563EB; display: inline-block; padding: 12px 20px; border-radius: 8px;">Merge Sort</div>
+<div style="margin: 24px 0; border-top: 1px solid #4B5563;"><br /></div>
+<div style="background: #FBBF24; color: #1f2937; display: inline-block; padding: 12px 18px; border-radius: 8px;">Si no: ¿la memoria adicional es una limitación?</div>
+<div style="font-size: 24px; margin: 10px;">↓ Sí</div>
+<div style="background: #10B981; display: inline-block; padding: 12px 20px; border-radius: 8px;">Heap Sort</div>
+<div style="margin: 24px 0; border-top: 1px solid #4B5563;"><br /></div>
+<div style="background: #FFFFFF; color: #1f2937; display: inline-block; padding: 12px 18px; border-radius: 8px;">Si no: evaluar Quick Sort según el pivote y el escenario</div>
+</div>
+<div style="background: #FFFBEB; border-left: 5px solid #FBBF24; padding: 18px 22px; border-radius: 8px; margin-top: 18px;">Este árbol es una guía de razonamiento, no una regla absoluta de selección.</div>
+</section>
+<!-- ANIMACIÓN COMPARATIVA -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #10B981; padding-bottom: 9px; margin-bottom: 20px;">Comparador interactivo de algoritmos</h3>
+<p>Selecciona un algoritmo para observar su estrategia, complejidad y forma de procesar la misma colección.</p>
+<div style="background: #F9FAFB; border: 1px solid #E5E7EB; padding: 24px; border-radius: 10px;"><!-- BOTONES -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 22px;"><button onclick="seleccionarAlgoritmo('merge')" style="background: #3B82F6; color: #ffffff; border: none; padding: 11px 20px; border-radius: 6px; cursor: pointer;"> Merge Sort </button> <button onclick="seleccionarAlgoritmo('quick')" style="background: #FBBF24; color: #1f2937; border: none; padding: 11px 20px; border-radius: 6px; cursor: pointer;"> Quick Sort </button> <button onclick="seleccionarAlgoritmo('heap')" style="background: #10B981; color: #ffffff; border: none; padding: 11px 20px; border-radius: 6px; cursor: pointer;"> Heap Sort </button></div>
+<!-- DATOS -->
+<div style="background: #1F2937; color: #ffffff; padding: 20px; border-radius: 9px; text-align: center;">
+<div style="color: #fbbf24; font-weight: bold;">Lista inicial</div>
+<div style="font-family: Consolas, monospace; font-size: 18px; margin-top: 10px;">[8, 3, 6, 2, 7, 1, 5, 4]</div>
+</div>
+<!-- INFO -->
+<div id="comparadorInfo" style="margin-top: 20px; background: #FFFFFF; border: 1px solid #E5E7EB; padding: 22px; border-radius: 9px;"></div>
+<!-- PROCESO -->
+<div id="comparadorProceso" style="margin-top: 18px; background: #1F2937; color: #ffffff; padding: 24px; border-radius: 9px; min-height: 130px; text-align: center; font-family: Consolas, monospace;"></div>
+<!-- CONTROLES -->
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px;"><button onclick="pasoAnteriorComparador()" style="background: #6B7280; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Anterior </button> <button onclick="siguientePasoComparador()" style="background: #3B82F6; color: #ffffff; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Siguiente paso </button> <button onclick="reiniciarComparador()" style="background: #FBBF24; color: #1f2937; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer;"> Reiniciar </button></div>
+</div>
+</section>
+<!-- 9. PYTHON COMPARACIÓN -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">9. Comparación utilizando Python</h3>
+<p>Podemos utilizar los tres algoritmos sobre exactamente los mismos datos.</p>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; padding: 22px; overflow: auto;"><code>numeros = [8, 3, 6, 2, 7, 1, 5, 4]
+
+
+resultado_merge = merge_sort(numeros)
+
+print(&quot;Merge Sort:&quot;, resultado_merge)
+
+
+resultado_quick = quick_sort(numeros)
+
+print(&quot;Quick Sort:&quot;, resultado_quick)
+
+
+resultado_heap = numeros.copy()
+
+heap_sort(resultado_heap)
+
+print(&quot;Heap Sort:&quot;, resultado_heap)</code></pre>
+<div style="background: #ECFDF5; border: 1px solid #A7F3D0; padding: 18px 22px; border-radius: 8px;">Los tres algoritmos deben producir:
+<div style="font-family: Consolas, monospace; margin-top: 8px;">[1, 2, 3, 4, 5, 6, 7, 8]</div>
+</div>
+</section>
+<!-- 10. MEDIR TIEMPO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">10. Medición básica de tiempo</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; padding: 22px; overflow: auto;"><code>import time
+
+numeros = [8, 3, 6, 2, 7, 1, 5, 4]
+
+inicio = time.perf_counter()
+
+resultado = merge_sort(numeros)
+
+fin = time.perf_counter()
+
+print(&quot;Tiempo:&quot;, fin - inicio)</code></pre>
+<div style="background: #FFFBEB; border-left: 5px solid #FBBF24; padding: 18px 22px; border-radius: 8px;">Una única medición con pocos elementos no permite concluir que un algoritmo sea siempre más rápido que otro.</div>
+</section>
+<!-- 11. DATOS ALEATORIOS -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">11. Crear datos para realizar pruebas</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; padding: 22px; overflow: auto;"><code>import random
+
+numeros = []
+
+for i in range(1000):
+    numeros.append(random.randint(1, 10000))
+
+
+datos_merge = numeros.copy()
+datos_quick = numeros.copy()
+datos_heap = numeros.copy()</code></pre>
+<p>Utilizar copias permite garantizar que los algoritmos trabajen sobre los mismos datos.</p>
+</section>
+<!-- 12. EXPERIMENTO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">12. Comparación experimental</h3>
+<pre style="background: #1F2937; color: #f9fafb; font-family: Consolas, Monaco, monospace; border-radius: 9px; padding: 22px; overflow: auto;"><code>import time
+import random
+
+
+numeros = []
+
+for i in range(1000):
+    numeros.append(random.randint(1, 10000))
+
+
+datos_merge = numeros.copy()
+datos_quick = numeros.copy()
+datos_heap = numeros.copy()
+
+
+inicio = time.perf_counter()
+
+merge_sort(datos_merge)
+
+fin = time.perf_counter()
+
+print(&quot;Merge Sort:&quot;, fin - inicio)
+
+
+inicio = time.perf_counter()
+
+quick_sort(datos_quick)
+
+fin = time.perf_counter()
+
+print(&quot;Quick Sort:&quot;, fin - inicio)
+
+
+inicio = time.perf_counter()
+
+heap_sort(datos_heap)
+
+fin = time.perf_counter()
+
+print(&quot;Heap Sort:&quot;, fin - inicio)</code></pre>
+</section>
+<!-- 13. TEORÍA VS EXPERIMENTO -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #3B82F6; padding-bottom: 9px; margin-bottom: 20px;">13. Complejidad teórica y tiempo real</h3>
+<p>Dos algoritmos pueden presentar <strong>O(n log n)</strong> y aun así registrar tiempos diferentes.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 18px;">
+<div style="flex: 1 1 280px; background: #EFF6FF; padding: 20px; border-radius: 9px;"><strong style="color: #1d4ed8;">Análisis teórico</strong>
+<p style="margin-bottom: 0;">Estudia cómo crece el trabajo del algoritmo cuando aumenta la cantidad de datos.</p>
+</div>
+<div style="flex: 1 1 280px; background: #ECFDF5; padding: 20px; border-radius: 9px;"><strong style="color: #047857;">Medición experimental</strong>
+<p style="margin-bottom: 0;">Observa el tiempo registrado durante una ejecución concreta.</p>
+</div>
+</div>
+</section>
+<!-- PRÁCTICA 1 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 1. Seleccionar según el escenario</h3>
+<div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 22px; border-radius: 9px;">
+<p><strong>Situación A</strong></p>
+<p>Se necesita ordenar una gran colección y evitar un peor caso O(n²). Determina qué algoritmos cumplen este requisito.</p>
+<p><strong>Situación B</strong></p>
+<p>La memoria disponible es limitada y se desea trabajar directamente sobre la colección. Analiza las alternativas.</p>
+<p><strong>Situación C</strong></p>
+<p style="margin-bottom: 0;">Los registros poseen claves repetidas y debe conservarse su orden relativo. Determina qué característica del algoritmo resulta prioritaria.</p>
+</div>
+</section>
+<!-- PRÁCTICA 2 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 2. Completar la comparación</h3>
+<div style="overflow-x: auto;">
+<table style="width: 100%; border-collapse: collapse; min-width: 700px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB;">Característica</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Merge Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Quick Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Heap Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Promedio</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Peor caso</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Estrategia</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">Estabilidad</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- PRÁCTICA 3 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 3. Comparación experimental</h3>
+<p>Genera conjuntos de diferentes tamaños y registra los tiempos obtenidos.</p>
+<pre style="background: #1F2937; color: #f9fafb; padding: 20px; border-radius: 8px;"><code>import random
+
+numeros = []
+
+for i in range(5000):
+    numeros.append(random.randint(1, 50000))</code></pre>
+<div style="overflow-x: auto; margin-top: 20px;">
+<table style="width: 100%; border-collapse: collapse; min-width: 650px;">
+<thead>
+<tr style="background: #3B82F6; color: #ffffff;">
+<th style="padding: 13px; border: 1px solid #2563EB;">Cantidad</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Merge Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Quick Sort</th>
+<th style="padding: 13px; border: 1px solid #2563EB;">Heap Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">100</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+</tr>
+<tr style="background: #F9FAFB;">
+<td style="padding: 12px; border: 1px solid #D1D5DB;">1000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #D1D5DB;">5000</td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+<td style="padding: 12px; border: 1px solid #D1D5DB;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- PRÁCTICA 4 -->
+<section style="margin-bottom: 34px;">
+<h3 style="color: #1f2937; font-size: 24px; border-bottom: 3px solid #FBBF24; padding-bottom: 9px; margin-bottom: 20px;">Práctica 4. Justificar una selección</h3>
+<div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 22px; border-radius: 9px;">
+<p>Un sistema procesa periódicamente grandes listas de registros. La memoria disponible es limitada, no es necesario conservar el orden relativo de registros equivalentes y se desea evitar un peor caso O(n²).</p>
+<ol style="margin-bottom: 0;">
+<li>Identifica las restricciones principales.</li>
+<li>Compara los tres algoritmos.</li>
+<li>Determina cuáles pueden descartarse.</li>
+<li>Selecciona una alternativa.</li>
+<li>Justifica la selección utilizando complejidad, memoria y estabilidad.</li>
+</ol>
+</div>
+</section>
+<!-- SÍNTESIS -->
+<div style="background: #1F2937; color: #ffffff; padding: 26px 30px; border-radius: 10px; margin-top: 30px;">
+<h3 style="margin: 0 0 12px 0; color: #fbbf24; font-size: 22px;">Síntesis</h3>
+<p style="margin: 0 0 10px 0;">Merge Sort, Quick Sort y Heap Sort pueden alcanzar un rendimiento eficiente, pero utilizan estrategias diferentes.</p>
+<p style="margin: 0 0 10px 0;">Merge Sort ofrece un comportamiento O(n log n) predecible y estabilidad habitual. Quick Sort destaca por su buen comportamiento promedio, aunque puede alcanzar O(n²). Heap Sort mantiene O(n log n) incluso en el peor caso y requiere poca memoria auxiliar.</p>
+<p style="margin: 0;">La selección debe considerar conjuntamente la complejidad temporal, memoria, estabilidad, distribución de los datos y necesidades particulares del problema.</p>
+</div>
+</div>
+<p>
+<script>
+/* =====================================================
+   COMPARADOR INTERACTIVO DE ALGORITMOS
+   ===================================================== */
+
+const datosComparador = {
+
+    merge: {
+        nombre: "Merge Sort",
+        estrategia: "Dividir y combinar",
+        promedio: "O(n log n)",
+        peor: "O(n log n)",
+        memoria: "Requiere memoria auxiliar",
+        estabilidad: "Estable habitualmente",
+        pasos: [
+            "[8, 3, 6, 2, 7, 1, 5, 4]",
+            "[8, 3, 6, 2]    [7, 1, 5, 4]",
+            "[8, 3] [6, 2]    [7, 1] [5, 4]",
+            "[8] [3] [6] [2] [7] [1] [5] [4]",
+            "[3, 8] [2, 6]    [1, 7] [4, 5]",
+            "[2, 3, 6, 8]    [1, 4, 5, 7]",
+            "[1, 2, 3, 4, 5, 6, 7, 8]"
+        ]
+    },
+
+    quick: {
+        nombre: "Quick Sort",
+        estrategia: "Particionamiento mediante pivote",
+        promedio: "O(n log n)",
+        peor: "O(n²)",
+        memoria: "Auxiliar en nuestra versión",
+        estabilidad: "No necesariamente estable",
+        pasos: [
+            "[8, 3, 6, 2, 7, 1, 5, 4]",
+            "Pivote = 7",
+            "[3, 6, 2, 1, 5, 4]   [7]   [8]",
+            "Pivote de la partición izquierda = 1",
+            "[] [1] [3, 6, 2, 5, 4]",
+            "Las particiones continúan procesándose",
+            "[1, 2, 3, 4, 5, 6, 7, 8]"
+        ]
+    },
+
+    heap: {
+        nombre: "Heap Sort",
+        estrategia: "Construcción y reducción de un Max Heap",
+        promedio: "O(n log n)",
+        peor: "O(n log n)",
+        memoria: "Memoria auxiliar reducida",
+        estabilidad: "No estable",
+        pasos: [
+            "[8, 3, 6, 2, 7, 1, 5, 4]",
+            "Construir Max Heap",
+            "[8, 7, 6, 4, 3, 1, 5, 2]",
+            "[2, 7, 6, 4, 3, 1, 5 | 8]",
+            "[7, 4, 6, 2, 3, 1, 5 | 8]",
+            "Reducir y restaurar el Heap repetidamente",
+            "[1, 2, 3, 4, 5, 6, 7, 8]"
+        ]
+    }
+};
+
+let algoritmoComparador = "merge";
+let pasoComparador = 0;
+
+
+/* -----------------------------------------------------
+   MOSTRAR INFORMACIÓN
+   ----------------------------------------------------- */
+
+function mostrarComparador() {
+
+    const datos = datosComparador[algoritmoComparador];
+
+    const info = document.getElementById("comparadorInfo");
+
+    info.innerHTML =
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">' +
+
+        '<div style="background:#EFF6FF;padding:14px;border-radius:7px;">' +
+        '<strong style="color:#1D4ED8;">Algoritmo</strong><br>' +
+        datos.nombre +
+        '</div>' +
+
+        '<div style="background:#FFFBEB;padding:14px;border-radius:7px;">' +
+        '<strong style="color:#92400E;">Estrategia</strong><br>' +
+        datos.estrategia +
+        '</div>' +
+
+        '<div style="background:#ECFDF5;padding:14px;border-radius:7px;">' +
+        '<strong style="color:#047857;">Promedio</strong><br>' +
+        datos.promedio +
+        '</div>' +
+
+        '<div style="background:#FEF2F2;padding:14px;border-radius:7px;">' +
+        '<strong style="color:#B91C1C;">Peor caso</strong><br>' +
+        datos.peor +
+        '</div>' +
+
+        '<div style="background:#F9FAFB;padding:14px;border-radius:7px;">' +
+        '<strong>Memoria</strong><br>' +
+        datos.memoria +
+        '</div>' +
+
+        '<div style="background:#F9FAFB;padding:14px;border-radius:7px;">' +
+        '<strong>Estabilidad</strong><br>' +
+        datos.estabilidad +
+        '</div>' +
+
+        '</div>';
+
+
+    document.getElementById("comparadorProceso").innerHTML =
+        '<div style="color:#FBBF24;font-family:Arial,sans-serif;font-weight:700;margin-bottom:14px;">' +
+        'Paso ' + (pasoComparador + 1) +
+        '</div>' +
+
+        '<div style="font-size:18px;">' +
+        datos.pasos[pasoComparador] +
+        '</div>';
+}
+
+
+/* -----------------------------------------------------
+   SELECCIONAR ALGORITMO
+   ----------------------------------------------------- */
+
+function seleccionarAlgoritmo(algoritmo) {
+
+    algoritmoComparador = algoritmo;
+
+    pasoComparador = 0;
+
+    mostrarComparador();
+}
+
+
+/* -----------------------------------------------------
+   SIGUIENTE
+   ----------------------------------------------------- */
+
+function siguientePasoComparador() {
+
+    const datos = datosComparador[algoritmoComparador];
+
+    if (pasoComparador < datos.pasos.length - 1) {
+
+        pasoComparador++;
+
+        mostrarComparador();
+    }
+}
+
+
+/* -----------------------------------------------------
+   ANTERIOR
+   ----------------------------------------------------- */
+
+function pasoAnteriorComparador() {
+
+    if (pasoComparador > 0) {
+
+        pasoComparador--;
+
+        mostrarComparador();
+    }
+}
+
+
+/* -----------------------------------------------------
+   REINICIAR
+   ----------------------------------------------------- */
+
+function reiniciarComparador() {
+
+    pasoComparador = 0;
+
+    mostrarComparador();
+}
+
+
+/* INICIALIZACIÓN */
+mostrarComparador();
+
+</script>
+</p>
+</div>
+</div>
+</div>
+</article>
+</div></main><div class="nav-buttons">
+<a href="../html/5-heap-sort-y-estructura-heap.html" title="Anterior" class="nav-button nav-button-left"><span>Anterior</span></a>
+<a href="../html/repaso-algoritmos-de-ordenamiento-eficientes.html" title="Siguiente" class="nav-button nav-button-right"><span>Siguiente</span></a>
+</div>
+<footer id="siteFooter"><div id="siteFooterContent"> <div id="packageLicense" class="cc"> <p> <span class="license-label">Licencia: </span><a href="https://creativecommons.org/licenses/by/4.0/" class="license">Creative Commons: Reconocimiento 4.0</a></p>
+</div>
+</div></footer>
+</div>
+<p id="made-with-eXe"> <a href="https://exelearning.net/" target="_blank" rel="noopener"> <span>Creado con eXeLearning <span>(Ventana nueva)</span></span></a></p>
+</body>
+</html>
